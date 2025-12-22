@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { CalculationExplanation } from './CalculationExplanation';
 import type { ProviderResults, ProviderInputs } from '@/types/provider';
 import { formatCurrency, formatPercentage } from '@/utils/providerCalculations';
 import { 
@@ -16,7 +17,8 @@ import {
   Minus,
   CheckCircle2,
   BarChart3,
-  Users
+  Users,
+  Globe
 } from 'lucide-react';
 
 interface ProviderResultCardProps {
@@ -113,11 +115,13 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
               <p className="text-xs text-muted-foreground">pro Jahr</p>
             </div>
           </div>
-          {reach.regionalMultiplier > 1 && (
-            <Badge variant="outline" className="text-primary border-primary">
-              +{Math.round((reach.regionalMultiplier - 1) * 100)}% Regional-Boost (Großstadt)
-            </Badge>
-          )}
+          
+          <Badge variant="outline" className="text-primary border-primary">
+            <Globe className="h-3 w-3 mr-1" />
+            {reach.regionName}
+          </Badge>
+          
+          <CalculationExplanation explanation={reach.explanation} />
         </CardContent>
       </Card>
 
@@ -165,6 +169,8 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
             </div>
             <CheckCircle2 className="h-10 w-10 text-green-500/50" />
           </div>
+          
+          <CalculationExplanation explanation={roi.explanation} />
         </CardContent>
       </Card>
 
@@ -213,6 +219,8 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
               </p>
             </div>
           )}
+          
+          <CalculationExplanation explanation={priceRecommendation.explanation} />
         </CardContent>
       </Card>
 
