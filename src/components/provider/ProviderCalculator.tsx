@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/select';
 import { ProviderResultCard } from './ProviderResultCard';
 import { useKursRadarStats } from '@/hooks/useKursRadarStats';
+import { useGTMTracking } from '@/hooks/useGTMTracking';
 import { calculateProviderResults } from '@/utils/providerCalculations';
 import { 
   DENTAL_CATEGORIES, 
@@ -42,23 +43,45 @@ export const ProviderCalculator = () => {
   const [results, setResults] = useState<ProviderResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const { data: stats, isLoading: statsLoading } = useKursRadarStats();
+  const { 
+    trackProviderFormStart, 
+    trackProviderFieldChange, 
+    trackProviderCalculation,
+    trackProviderResultsView 
+  } = useGTMTracking();
+  
+  const hasTrackedFormStart = useRef(false);
+  const hasTrackedResultsView = useRef(false);
+
+  // Track form start on first interaction
+  const trackFormStartOnce = () => {
+    if (!hasTrackedFormStart.current) {
+      hasTrackedFormStart.current = true;
+      trackProviderFormStart();
+    }
+  };
 
   const handleInputChange = (field: keyof ProviderInputs, value: string | number | string[]) => {
+    trackFormStartOnce();
     setInputs((prev) => ({ ...prev, [field]: value }));
+    trackProviderFieldChange(field, value);
   };
 
   const handleRegionChange = (regionId: RegionId) => {
+    trackFormStartOnce();
     setInputs((prev) => ({ ...prev, region: regionId, localArea: '' }));
+    trackProviderFieldChange('region', regionId);
   };
 
   const handleCategoryToggle = (category: string) => {
+    trackFormStartOnce();
     setInputs((prev) => {
       const currentCategories = prev.categories;
-      if (currentCategories.includes(category)) {
-        return { ...prev, categories: currentCategories.filter((c) => c !== category) };
-      } else {
-        return { ...prev, categories: [...currentCategories, category] };
-      }
+      const newCategories = currentCategories.includes(category) 
+        ? currentCategories.filter((c) => c !== category)
+        : [...currentCategories, category];
+      trackProviderFieldChange('categories', newCategories);
+      return { ...prev, categories: newCategories };
     });
   };
 
@@ -66,15 +89,36 @@ export const ProviderCalculator = () => {
     if (!stats) return;
     
     setIsCalculating(true);
+    hasTrackedResultsView.current = false; // Reset for new calculation
     try {
       const calculatedResults = await calculateProviderResults(inputs, stats);
       setResults(calculatedResults);
+      
+      // Track calculation completed
+      const region = REGIONS[inputs.region];
+      trackProviderCalculation({
+        coursesPerYear: inputs.coursesPerYear,
+        averagePrice: inputs.averagePrice,
+        region: region.name,
+        categoriesCount: inputs.categories.length,
+        estimatedViews: calculatedResults.reach.estimatedViews,
+        additionalRevenue: calculatedResults.roi.additionalRevenue,
+        roiPercentage: calculatedResults.roi.roiPercentage
+      });
     } catch (error) {
       console.error('Calculation error:', error);
     } finally {
       setIsCalculating(false);
     }
   };
+
+  // Track when results become visible
+  useEffect(() => {
+    if (results && !hasTrackedResultsView.current) {
+      hasTrackedResultsView.current = true;
+      trackProviderResultsView('all');
+    }
+  }, [results, trackProviderResultsView]);
 
   const isFormValid = inputs.region && inputs.categories.length > 0;
 

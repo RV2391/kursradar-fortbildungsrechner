@@ -1,5 +1,5 @@
 
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { getTrackingSource } from '@/utils/environmentDetection';
 
 interface GTMEvent {
@@ -111,6 +111,77 @@ export const useGTMTracking = () => {
     });
   }, [trackEvent]);
 
+  // === Provider Calculator Tracking ===
+  
+  const trackProviderFormStart = useCallback(() => {
+    trackEvent({
+      event: 'provider_form_start',
+      form_type: 'provider_calculator'
+    });
+  }, [trackEvent]);
+
+  const trackProviderFieldChange = useCallback((fieldName: string, value: string | number | string[]) => {
+    trackEvent({
+      event: 'provider_field_change',
+      form_type: 'provider_calculator',
+      field_name: fieldName,
+      field_value: Array.isArray(value) ? value.join(', ') : value
+    });
+  }, [trackEvent]);
+
+  const trackProviderCalculation = useCallback((data: {
+    coursesPerYear: number;
+    averagePrice: number;
+    region: string;
+    categoriesCount: number;
+    estimatedViews: number;
+    additionalRevenue: number;
+    roiPercentage: number;
+  }) => {
+    trackEvent({
+      event: 'provider_calculation_completed',
+      form_type: 'provider_calculator',
+      courses_per_year: data.coursesPerYear,
+      average_price: data.averagePrice,
+      region: data.region,
+      categories_count: data.categoriesCount,
+      estimated_views: data.estimatedViews,
+      additional_revenue: Math.round(data.additionalRevenue),
+      roi_percentage: data.roiPercentage
+    });
+  }, [trackEvent]);
+
+  const trackProviderResultsView = useCallback((section: 'reach' | 'roi' | 'price' | 'all') => {
+    trackEvent({
+      event: 'provider_results_viewed',
+      form_type: 'provider_calculator',
+      section_viewed: section
+    });
+  }, [trackEvent]);
+
+  const trackProviderExplanationOpen = useCallback((explanationType: 'reach' | 'roi' | 'price') => {
+    trackEvent({
+      event: 'provider_explanation_opened',
+      form_type: 'provider_calculator',
+      explanation_type: explanationType
+    });
+  }, [trackEvent]);
+
+  const trackProviderLeadFormStart = useCallback(() => {
+    trackEvent({
+      event: 'provider_lead_form_start',
+      form_type: 'provider_lead'
+    });
+  }, [trackEvent]);
+
+  const trackProviderLeadFieldComplete = useCallback((fieldName: string) => {
+    trackEvent({
+      event: 'provider_lead_field_complete',
+      form_type: 'provider_lead',
+      field_name: fieldName
+    });
+  }, [trackEvent]);
+
   return {
     trackEvent,
     trackCalculatorInteraction,
@@ -120,6 +191,46 @@ export const useGTMTracking = () => {
     trackCalculationCompleted,
     trackTimeSavingsViewed,
     trackFormStart,
-    trackFormFieldComplete
+    trackFormFieldComplete,
+    // Provider tracking
+    trackProviderFormStart,
+    trackProviderFieldChange,
+    trackProviderCalculation,
+    trackProviderResultsView,
+    trackProviderExplanationOpen,
+    trackProviderLeadFormStart,
+    trackProviderLeadFieldComplete
   };
+};
+
+// Custom hook for scroll tracking
+export const useScrollTracking = (elementId: string, eventName: string) => {
+  const hasTracked = useRef(false);
+  const { trackEvent } = useGTMTracking();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (hasTracked.current) return;
+      
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      
+      const rect = element.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isVisible) {
+        hasTracked.current = true;
+        trackEvent({
+          event: eventName,
+          element_id: elementId
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Check immediately in case element is already visible
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [elementId, eventName, trackEvent]);
 };

@@ -5,15 +5,25 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useGTMTracking } from '@/hooks/useGTMTracking';
 import type { CalculationExplanation as ExplanationType } from '@/types/provider';
 
 interface CalculationExplanationProps {
   explanation: ExplanationType;
+  explanationType: 'reach' | 'roi' | 'price';
 }
 
-export const CalculationExplanation = ({ explanation }: CalculationExplanationProps) => {
+export const CalculationExplanation = ({ explanation, explanationType }: CalculationExplanationProps) => {
+  const { trackProviderExplanationOpen } = useGTMTracking();
+
+  const handleAccordionChange = (value: string) => {
+    if (value === 'explanation') {
+      trackProviderExplanationOpen(explanationType);
+    }
+  };
+
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className="w-full" onValueChange={handleAccordionChange}>
       <AccordionItem value="explanation" className="border-none">
         <AccordionTrigger className="py-2 text-sm text-muted-foreground hover:text-primary hover:no-underline">
           <span className="flex items-center gap-1.5">

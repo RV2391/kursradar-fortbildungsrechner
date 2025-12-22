@@ -121,7 +121,7 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
             {reach.regionName}
           </Badge>
           
-          <CalculationExplanation explanation={reach.explanation} />
+          <CalculationExplanation explanation={reach.explanation} explanationType="reach" />
         </CardContent>
       </Card>
 
@@ -170,7 +170,7 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
             <CheckCircle2 className="h-10 w-10 text-green-500/50" />
           </div>
           
-          <CalculationExplanation explanation={roi.explanation} />
+          <CalculationExplanation explanation={roi.explanation} explanationType="roi" />
         </CardContent>
       </Card>
 
@@ -220,7 +220,7 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
             </div>
           )}
           
-          <CalculationExplanation explanation={priceRecommendation.explanation} />
+          <CalculationExplanation explanation={priceRecommendation.explanation} explanationType="price" />
         </CardContent>
       </Card>
 
