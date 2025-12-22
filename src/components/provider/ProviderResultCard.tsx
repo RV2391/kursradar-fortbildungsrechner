@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CalculationExplanation } from './CalculationExplanation';
+import { ProviderLeadForm } from './ProviderLeadForm';
 import type { ProviderResults, ProviderInputs } from '@/types/provider';
-import { formatCurrency, formatPercentage } from '@/utils/providerCalculations';
+import { formatCurrency } from '@/utils/providerCalculations';
 import { 
   Eye, 
   MousePointer, 
@@ -224,20 +224,8 @@ export const ProviderResultCard = ({ results, inputs }: ProviderResultCardProps)
         </CardContent>
       </Card>
 
-      {/* CTA */}
-      <Card className="bg-primary text-primary-foreground">
-        <CardContent className="py-6 text-center space-y-4">
-          <h3 className="font-montserrat text-xl font-semibold">
-            Bereit, Ihre Reichweite zu steigern?
-          </h3>
-          <p className="text-sm text-primary-foreground/80">
-            Werden Sie KursRadar Partner und erreichen Sie mehr Teilnehmer.
-          </p>
-          <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-            Jetzt Partner werden
-          </Button>
-        </CardContent>
-      </Card>
+      {/* Lead Form */}
+      <ProviderLeadForm inputs={inputs} results={results} />
     </motion.div>
   );
 };
