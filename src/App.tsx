@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Embed from "./pages/Embed";
+import Provider from "./pages/Provider";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/anbieter" element={<Provider />} />
           <Route path="/embed" element={<Embed />} />
         </Routes>
       </BrowserRouter>
