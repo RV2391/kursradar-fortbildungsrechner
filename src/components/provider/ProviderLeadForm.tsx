@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,11 +29,26 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
   });
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasTrackedFormStart = useRef(false);
   const { toast } = useToast();
-  const { trackEvent } = useGTMTracking();
+  const { trackEvent, trackProviderLeadFormStart, trackProviderLeadFieldComplete } = useGTMTracking();
+
+  const trackFormStartOnce = () => {
+    if (!hasTrackedFormStart.current) {
+      hasTrackedFormStart.current = true;
+      trackProviderLeadFormStart();
+    }
+  };
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
+    trackFormStartOnce();
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleFieldBlur = (field: keyof typeof formData) => {
+    if (formData[field]) {
+      trackProviderLeadFieldComplete(field);
+    }
   };
 
   const isFormValid = formData.companyName && formData.email && consent;
@@ -217,6 +232,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 type="text"
                 value={formData.companyName}
                 onChange={(e) => handleInputChange('companyName', e.target.value)}
+                onBlur={() => handleFieldBlur('companyName')}
                 placeholder="z.B. Dental Academy München"
                 required
                 disabled={isSubmitting}
@@ -235,6 +251,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 type="text"
                 value={formData.contactName}
                 onChange={(e) => handleInputChange('contactName', e.target.value)}
+                onBlur={() => handleFieldBlur('contactName')}
                 placeholder="Vor- und Nachname"
                 disabled={isSubmitting}
                 className="bg-input"
@@ -252,6 +269,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
+                onBlur={() => handleFieldBlur('email')}
                 placeholder="kontakt@ihre-institution.de"
                 required
                 disabled={isSubmitting}
@@ -270,6 +288,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
+                onBlur={() => handleFieldBlur('phone')}
                 placeholder="+49 123 456789"
                 disabled={isSubmitting}
                 className="bg-input"
@@ -286,6 +305,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 id="message"
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
+                onBlur={() => handleFieldBlur('message')}
                 placeholder="Haben Sie spezielle Fragen oder Anmerkungen?"
                 disabled={isSubmitting}
                 className="bg-input min-h-[80px]"
