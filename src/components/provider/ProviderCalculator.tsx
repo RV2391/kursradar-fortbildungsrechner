@@ -16,15 +16,23 @@ import {
 import { ProviderResultCard } from './ProviderResultCard';
 import { useKursRadarStats } from '@/hooks/useKursRadarStats';
 import { calculateProviderResults } from '@/utils/providerCalculations';
-import { DENTAL_CATEGORIES, DENTAL_BENCHMARKS, type ProviderInputs, type ProviderResults } from '@/types/provider';
-import { Calculator, TrendingUp, Users, MapPin, X } from 'lucide-react';
+import { 
+  DENTAL_CATEGORIES, 
+  DENTAL_BENCHMARKS, 
+  REGIONS,
+  type ProviderInputs, 
+  type ProviderResults,
+  type RegionId 
+} from '@/types/provider';
+import { Calculator, TrendingUp, Users, MapPin, X, Globe } from 'lucide-react';
 
 const defaultInputs: ProviderInputs = {
   coursesPerYear: 12,
   averagePrice: DENTAL_BENCHMARKS.averageCoursePrice,
   maxParticipants: 15,
   averageOccupancy: 70,
-  postalCode: '',
+  region: 'germany',
+  localArea: '',
   categories: [],
   hardToFillCourses: '',
 };
@@ -37,6 +45,10 @@ export const ProviderCalculator = () => {
 
   const handleInputChange = (field: keyof ProviderInputs, value: string | number | string[]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleRegionChange = (regionId: RegionId) => {
+    setInputs((prev) => ({ ...prev, region: regionId, localArea: '' }));
   };
 
   const handleCategoryToggle = (category: string) => {
@@ -64,7 +76,7 @@ export const ProviderCalculator = () => {
     }
   };
 
-  const isFormValid = inputs.postalCode.length >= 4 && inputs.categories.length > 0;
+  const isFormValid = inputs.region && inputs.categories.length > 0;
 
   return (
     <div className="w-full">
@@ -174,21 +186,38 @@ export const ProviderCalculator = () => {
               </p>
             </div>
 
-            {/* Postal code / Region */}
+            {/* Region Selection */}
             <div className="space-y-2">
-              <Label htmlFor="postalCode" className="flex items-center gap-2 text-card-foreground">
-                <MapPin className="h-4 w-4 text-primary" />
-                Postleitzahl / Einzugsgebiet
+              <Label htmlFor="region" className="flex items-center gap-2 text-card-foreground">
+                <Globe className="h-4 w-4 text-primary" />
+                Einzugsgebiet
               </Label>
-              <Input
-                id="postalCode"
-                type="text"
-                maxLength={5}
-                placeholder="z.B. 80331"
-                value={inputs.postalCode}
-                onChange={(e) => handleInputChange('postalCode', e.target.value.replace(/\D/g, ''))}
-                className="font-roboto"
-              />
+              <Select
+                value={inputs.region}
+                onValueChange={(value) => handleRegionChange(value as RegionId)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Region wählen" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.values(REGIONS).map((region) => (
+                    <SelectItem key={region.id} value={region.id}>
+                      <div className="flex flex-col items-start">
+                        <span>{region.name}</span>
+                        <span className="text-xs text-muted-foreground">{region.description}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {inputs.region === 'local' && (
+                <Input
+                  placeholder="Stadt oder Region eingeben"
+                  value={inputs.localArea || ''}
+                  onChange={(e) => handleInputChange('localArea', e.target.value)}
+                  className="mt-2"
+                />
+              )}
             </div>
 
             {/* Categories */}
@@ -241,7 +270,7 @@ export const ProviderCalculator = () => {
           
           {!isFormValid && (
             <p className="text-xs text-muted-foreground text-center">
-              Bitte PLZ und mindestens eine Kategorie auswählen
+              Bitte Region und mindestens eine Kategorie auswählen
             </p>
           )}
         </motion.div>

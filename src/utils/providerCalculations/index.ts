@@ -4,18 +4,18 @@ import type {
   KursRadarStats,
   ReachAnalysis,
   ROICalculation,
-  PriceRecommendation 
+  PriceRecommendation,
+  CalculationExplanation
 } from '@/types/provider';
-import { DENTAL_BENCHMARKS } from '@/types/provider';
+import { DENTAL_BENCHMARKS, REGIONS } from '@/types/provider';
 
 // Calculate reach analysis based on KursRadar stats and provider inputs
 function calculateReach(
   inputs: ProviderInputs, 
   stats: KursRadarStats
 ): ReachAnalysis {
-  // Regional multiplier based on postal code (simplified - could be expanded)
-  const postalPrefix = inputs.postalCode.substring(0, 2);
-  const regionalMultiplier = getRegionalMultiplier(postalPrefix);
+  const region = REGIONS[inputs.region];
+  const regionalMultiplier = region.multiplier;
   
   // Estimate potential reach based on total platform visitors
   const baseReach = stats.totalUniqueVisitors * regionalMultiplier;
@@ -25,28 +25,31 @@ function calculateReach(
   const estimatedViews = Math.round(potentialReach * inputs.coursesPerYear * 0.1);
   const estimatedClicks = Math.round(estimatedViews * DENTAL_BENCHMARKS.clickThroughRate);
   
+  const explanation: CalculationExplanation = {
+    formula: 'Monatliche Besucher × Regionsanteil × Kategorie-Boost × Kurse × Sichtbarkeitsfaktor',
+    values: [
+      { label: 'Monatliche Besucher', value: stats.totalUniqueVisitors.toLocaleString('de-DE') },
+      { label: 'Regionsanteil', value: `${(regionalMultiplier * 100).toFixed(0)}% (${region.name})` },
+      { label: 'Kategorie-Boost', value: `${((categoryBoost - 1) * 100).toFixed(0)}% (${inputs.categories.length} Kategorien)` },
+      { label: 'Kurse pro Jahr', value: inputs.coursesPerYear.toString() },
+      { label: 'Sichtbarkeitsfaktor', value: '10% (konservativ)' },
+      { label: 'Klickrate (CTR)', value: `${(DENTAL_BENCHMARKS.clickThroughRate * 100).toFixed(0)}%` },
+    ],
+    assumptions: [
+      'Die Reichweite basiert auf aktuellen Plattform-Statistiken',
+      'Der Regionsanteil entspricht der Verteilung der Zahnarztpraxen',
+      'Die Klickrate von 8% ist ein Branchendurchschnitt',
+    ],
+  };
+  
   return {
     potentialReach,
     estimatedViews,
     estimatedClicks,
     regionalMultiplier,
+    regionName: region.name,
+    explanation,
   };
-}
-
-// Get regional multiplier based on postal code prefix (German postal system)
-function getRegionalMultiplier(postalPrefix: string): number {
-  // Major metropolitan areas get higher multipliers
-  const metropolitanAreas: Record<string, number> = {
-    '10': 1.3, '12': 1.3, '13': 1.3, // Berlin
-    '80': 1.4, '81': 1.4, // München
-    '20': 1.2, '21': 1.2, '22': 1.2, // Hamburg
-    '50': 1.2, '51': 1.2, // Köln
-    '60': 1.25, '61': 1.25, // Frankfurt
-    '40': 1.15, '41': 1.15, // Düsseldorf
-    '70': 1.2, '71': 1.2, // Stuttgart
-  };
-  
-  return metropolitanAreas[postalPrefix] || 1.0;
 }
 
 // Calculate ROI based on provider inputs and KursRadar stats
@@ -82,6 +85,23 @@ function calculateROI(
   const monthlyBenefit = netBenefit / 12;
   const breakEvenMonths = monthlyBenefit > 0 ? Math.ceil(kursRadarCommission / monthlyBenefit) : 0;
   
+  const explanation: CalculationExplanation = {
+    formula: 'Zusätzliche Buchungen × Kurspreis - KursRadar Provision (5%)',
+    values: [
+      { label: 'Erwartete Klicks', value: reach.estimatedClicks.toLocaleString('de-DE') },
+      { label: 'Konversionsrate', value: `${(DENTAL_BENCHMARKS.conversionRate * 100).toFixed(0)}%` },
+      { label: 'Geschätzte Buchungen', value: estimatedBookings.toString() },
+      { label: 'Zusätzliche Teilnehmer', value: additionalParticipants.toString() },
+      { label: 'Kurspreis', value: formatCurrency(inputs.averagePrice) },
+      { label: 'Provision', value: `${(DENTAL_BENCHMARKS.commissionRate * 100).toFixed(0)}%` },
+    ],
+    assumptions: [
+      'Die Konversionsrate von 3% basiert auf Erfahrungswerten ähnlicher Plattformen',
+      'Nur zusätzliche Buchungen werden provisionspflichtig',
+      'Die Teilnehmerzahl ist auf die verfügbare Kapazität begrenzt',
+    ],
+  };
+  
   return {
     currentRevenue,
     additionalParticipants,
@@ -90,6 +110,7 @@ function calculateROI(
     netBenefit,
     roiPercentage: Math.round(roiPercentage),
     breakEvenMonths: Math.min(breakEvenMonths, 12), // Cap at 12 months
+    explanation,
   };
 }
 
@@ -131,12 +152,31 @@ function calculatePriceRecommendation(inputs: ProviderInputs): PriceRecommendati
     occupancyGap * inputs.maxParticipants * inputs.coursesPerYear * inputs.averagePrice
   ));
   
+  const priceDiffPercent = ((currentPrice - industryAverage) / industryAverage * 100).toFixed(0);
+  
+  const explanation: CalculationExplanation = {
+    formula: 'Vergleich mit Branchendurchschnitt + Auslastungsoptimierung',
+    values: [
+      { label: 'Ihr Kurspreis', value: formatCurrency(currentPrice) },
+      { label: 'Branchenschnitt', value: formatCurrency(industryAverage) },
+      { label: 'Differenz', value: `${priceDiffPercent}%` },
+      { label: 'Aktuelle Auslastung', value: `${inputs.averageOccupancy}%` },
+      { label: 'Ziel-Auslastung', value: '85%' },
+    ],
+    assumptions: [
+      'Die Branchendaten basieren auf Durchschnittswerten der Dentalbranche',
+      'Höhere Preise können bei entsprechender Qualität gerechtfertigt sein',
+      'Eine Auslastung von 85% gilt als optimal',
+    ],
+  };
+  
   return {
     currentPrice,
     industryAverage,
     recommendedPrice,
     pricePosition,
     optimizationPotential,
+    explanation,
   };
 }
 
