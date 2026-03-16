@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Embed from "./pages/Embed";
 import Provider from "./pages/Provider";
 import BAfoeg from "./pages/BAfoeg";
+import Bildungsurlaub from "./pages/Bildungsurlaub";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/anbieter" element={<Provider />} />
           <Route path="/bafoeg" element={<BAfoeg />} />
+          <Route path="/bildungsurlaub" element={<Bildungsurlaub />} />
           <Route path="/embed" element={<Embed />} />
         </Routes>
       </BrowserRouter>
