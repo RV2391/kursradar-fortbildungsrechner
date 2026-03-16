@@ -119,9 +119,7 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
     dqrNiveau: 6,
     voraussetzungen: 'ZMP- oder ZMF-Abschluss, mind. 2 Jahre Berufserfahrung in Prophylaxe',
     afbgFoerderfaehig: true,
-    kostenQuelle: 'DH-Akademien (proDente,
-
-Carlsburg, Heddesheim), Durchschnitt 2025',
+    kostenQuelle: 'DH-Akademien (proDente, Carlsburg, Heddesheim), Durchschnitt 2025',
     istMeisterpruefung: false,
   },
   {
