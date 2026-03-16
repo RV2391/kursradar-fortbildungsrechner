@@ -54,7 +54,7 @@ export const calculateAnnualCMERequirements = (
   };
 };
 
-// Typische Online-Fortbildungseinheit (ueber KursRadar auffindbar)
+// Typische Online-Fortbildungseinheit (über KursRadar auffindbar)
 // Quelle: Durchschnittswerte CME-zertifizierter Online-Kurse (Dental Online College, ZWP Study Club)
 export const TYPICAL_ONLINE_UNIT: CMEUnit = {
   duration: 45, // 45 Minuten pro Einheit

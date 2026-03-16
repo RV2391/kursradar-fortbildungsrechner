@@ -79,7 +79,7 @@ export const BAfoegRechner = () => {
               </h2>
             </div>
             <p className="text-sm text-muted-foreground font-roboto">
-              Berechne, wie viel du fuer deine Fortbildung wirklich zahlst
+              Berechne, wie viel du für deine Fortbildung wirklich zahlst
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export const BAfoegRechner = () => {
             </Label>
             <Select value={selectedTyp} onValueChange={handleTypChange}>
               <SelectTrigger>
-                <SelectValue placeholder="Fortbildung waehlen..." />
+                <SelectValue placeholder="Fortbildung wählen..." />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="_header_zfa" disabled>
@@ -189,7 +189,7 @@ export const BAfoegRechner = () => {
                     Aufstiegsfortbildungsfoerderungsgesetz (AFBG)
                   </a>
                   , Stand 2024. Foerderhoehe: 50 % Zuschuss + 50 % KfW-Darlehen, davon 50 % Erlass bei
-                  Bestehen = effektiv bis zu 75 % Foerderung.
+                  Bestehen = effektiv bis zu 75 % Förderung.
                 </p>
               </div>
             </div>
@@ -214,7 +214,7 @@ export const BAfoegRechner = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  {/* Grosse Zahl */}
+                  {/* Große Zahl */}
                   <div className="text-center py-4">
                     <div className="text-5xl font-bold text-green-500 font-montserrat">
                       {formatCurrency(ergebnis.eigenanteilEffektiv)}
@@ -243,7 +243,7 @@ export const BAfoegRechner = () => {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">
-                          Davon foerderfaehig (max. 15.000 EUR + 2.000 EUR Pruefung)
+                          Davon foerderfaehig (max. 15.000 EUR + 2.000 EUR Prüfung)
                         </span>
                         <span className="text-card-foreground">
                           {formatCurrency(ergebnis.foerderfaehigeKosten)}
@@ -282,7 +282,7 @@ export const BAfoegRechner = () => {
                   <div className="rounded-lg bg-muted/50 p-3">
                     <p className="text-xs text-muted-foreground">
                       <Info className="h-3 w-3 inline mr-1" />
-                      Falls du die Pruefung nicht bestehst, entfaellt der Erlass. Dann zahlst du{' '}
+                      Falls du die Prüfung nicht bestehst, entfaellt der Erlass. Dann zahlst du{' '}
                       <strong>{formatCurrency(ergebnis.eigenanteilOhneErlass)}</strong> (Zuschuss bleibt, Darlehen
                       wird voll zurueckgezahlt).
                     </p>
@@ -307,7 +307,7 @@ export const BAfoegRechner = () => {
                       <div>
                         <p className="font-medium text-card-foreground">50 % Zuschuss — geschenkt</p>
                         <p className="text-muted-foreground">
-                          Die Haelfte der Kosten uebernimmt der Staat. Kein Rueckzahlen, kein Kleingedrucktes.
+                          Die Haelfte der Kosten übernimmt der Staat. Kein Rueckzahlen, kein Kleingedrucktes.
                         </p>
                       </div>
                     </div>
@@ -330,7 +330,7 @@ export const BAfoegRechner = () => {
                       <div>
                         <p className="font-medium text-card-foreground">50 % Erlass bei Bestehen</p>
                         <p className="text-muted-foreground">
-                          Wenn du die Pruefung bestehst, werden 50 % des Darlehens erlassen.
+                          Wenn du die Prüfung bestehst, werden 50 % des Darlehens erlassen.
                           Effektiv zahlst du nur ca. 25 % der Kosten selbst.
                         </p>
                       </div>
@@ -344,8 +344,8 @@ export const BAfoegRechner = () => {
                     <ul className="space-y-1 text-muted-foreground list-disc pl-4">
                       <li>Alle mit abgeschlossener Erstausbildung (z. B. ZFA, Zahntechniker)</li>
                       <li>Altersunabhaengig — kein Hoechstalter</li>
-                      <li>Einkommensunabhaengig fuer den Zuschuss</li>
-                      <li>Auch berufsbegleitend moeglich</li>
+                      <li>Einkommensunabhaengig für den Zuschuss</li>
+                      <li>Auch berufsbegleitend möglich</li>
                     </ul>
                   </div>
 
@@ -382,7 +382,7 @@ export const BAfoegRechner = () => {
                     </Button>
                   </a>
                   <p className="text-xs text-muted-foreground">
-                    KursRadar ist fuer dich kostenlos. Anbieter zahlen eine Provision.
+                    KursRadar ist für dich kostenlos. Anbieter zahlen eine Provision.
                   </p>
                 </CardContent>
               </Card>
@@ -396,7 +396,7 @@ export const BAfoegRechner = () => {
                     aufstiegs-bafoeg.de
                   </a>
                 </p>
-                <p>• Fortbildungskosten: Durchschnittswerte der Landeszahnaerztekammern und Fortbildungsakademien, Stand 2025</p>
+                <p>• Fortbildungskosten: Durchschnittswerte der Landeszahnärztekammern und Fortbildungsakademien, Stand 2025</p>
                 <p>• Foerderungssaetze: AFBG in der Fassung der letzten Novelle 2024</p>
               </div>
             </motion.div>
@@ -416,7 +416,7 @@ export const BAfoegRechner = () => {
               </p>
               <div className="mt-6 flex items-center gap-2 text-primary text-sm">
                 <TrendingUp className="h-4 w-4" />
-                <span className="font-medium">Bis zu 75 % Foerderung moeglich</span>
+                <span className="font-medium">Bis zu 75 % Förderung möglich</span>
               </div>
             </motion.div>
           )}

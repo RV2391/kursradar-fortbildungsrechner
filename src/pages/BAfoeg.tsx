@@ -9,11 +9,11 @@ const BAfoeg = () => {
             <span className="text-primary">Aufstiegs-BAfoeg</span> Rechner
           </h1>
           <p className="mt-4 text-lg text-muted-foreground font-roboto max-w-2xl mx-auto">
-            Berechne deinen tatsaechlichen Eigenanteil fuer zahnmedizinische
+            Berechne deinen tatsächlichen Eigenanteil für zahnmedizinische
             Aufstiegsfortbildungen — von ZMP bis Dentalhygienikerin.
           </p>
           <p className="mt-2 text-sm text-muted-foreground/70 font-roboto">
-            Bis zu 75 % Foerderung durch das Aufstiegsfortbildungsfoerderungsgesetz (AFBG)
+            Bis zu 75 % Förderung durch das Aufstiegsfortbildungsfoerderungsgesetz (AFBG)
           </p>
         </div>
         <BAfoegRechner />

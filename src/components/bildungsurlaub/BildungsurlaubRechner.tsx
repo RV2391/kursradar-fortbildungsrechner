@@ -47,25 +47,25 @@ interface BundeslandInfo {
 }
 
 const BUNDESLAENDER: BundeslandInfo[] = [
-  { code: 'BW', name: 'Baden-Wuerttemberg', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 10, wartezeit: '12 Monate', antragsfrist: '8 Wochen', gesetz: 'BzG BW', besonderheiten: 'Kleinbetriebsklausel: Unter 10 Beschaeftigte = KEIN Anspruch. Fuer kleine Zahnarztpraxen oft relevant!', keinAnspruch: false },
-  { code: 'BY', name: 'Bayern', tageProJahr: null, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '-', antragsfrist: '-', gesetz: 'Kein Gesetz', besonderheiten: 'Einziges Bundesland ohne Bildungsurlaubsgesetz. Anspruch nur ueber Tarifvertrag oder Betriebsvereinbarung moeglich.', keinAnspruch: true },
+  { code: 'BW', name: 'Baden-Wuerttemberg', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 10, wartezeit: '12 Monate', antragsfrist: '8 Wochen', gesetz: 'BzG BW', besonderheiten: 'Kleinbetriebsklausel: Unter 10 Beschaeftigte = KEIN Anspruch. Für kleine Zahnarztpraxen oft relevant!', keinAnspruch: false },
+  { code: 'BY', name: 'Bayern', tageProJahr: null, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '-', antragsfrist: '-', gesetz: 'Kein Gesetz', besonderheiten: 'Einziges Bundesland ohne Bildungsurlaubsgesetz. Anspruch nur über Tarifvertrag oder Betriebsvereinbarung möglich.', keinAnspruch: true },
   { code: 'BE', name: 'Berlin', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'BiUrlG BE', besonderheiten: 'Unter 25-Jaehrige: 10 Tage pro Jahr (statt in 2 Jahren). Ueberforderungsschutz bei ≤20 Beschaeftigten.', keinAnspruch: false },
   { code: 'BB', name: 'Brandenburg', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'BbgWBG', besonderheiten: '', keinAnspruch: false },
-  { code: 'HB', name: 'Bremen', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '4 Wochen', gesetz: 'BremBUG', besonderheiten: 'Unter 25-Jaehrige: zusaetzlich 2 Tage fuer politische Bildung.', keinAnspruch: false },
+  { code: 'HB', name: 'Bremen', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '4 Wochen', gesetz: 'BremBUG', besonderheiten: 'Unter 25-Jaehrige: zusätzlich 2 Tage für politische Bildung.', keinAnspruch: false },
   { code: 'HH', name: 'Hamburg', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'HmbBUG', besonderheiten: '', keinAnspruch: false },
   { code: 'HE', name: 'Hessen', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'HBUG', besonderheiten: '', keinAnspruch: false },
-  { code: 'MV', name: 'Mecklenburg-Vorpommern', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '8 Wochen', gesetz: 'BfG M-V', besonderheiten: 'Auch fuer ehrenamtliche Taetigkeit nutzbar.', keinAnspruch: false },
+  { code: 'MV', name: 'Mecklenburg-Vorpommern', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '8 Wochen', gesetz: 'BfG M-V', besonderheiten: 'Auch für ehrenamtliche Tätigkeit nutzbar.', keinAnspruch: false },
   { code: 'NI', name: 'Niedersachsen', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '4 Wochen', gesetz: 'NBildUG', besonderheiten: '', keinAnspruch: false },
-  { code: 'NW', name: 'Nordrhein-Westfalen', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 10, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'AWbG NRW', besonderheiten: 'Kleinbetriebsklausel: Unter 10 Beschaeftigte = KEIN Anspruch. Fuer kleine Zahnarztpraxen oft relevant!', keinAnspruch: false },
+  { code: 'NW', name: 'Nordrhein-Westfalen', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 10, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'AWbG NRW', besonderheiten: 'Kleinbetriebsklausel: Unter 10 Beschaeftigte = KEIN Anspruch. Für kleine Zahnarztpraxen oft relevant!', keinAnspruch: false },
   { code: 'RP', name: 'Rheinland-Pfalz', tageProJahr: 10, zweiJahresRegelung: true, kleinbetriebsSchwelle: 5, wartezeit: '2 Jahre (!)', antragsfrist: '6 Wochen', gesetz: 'BFG RP', besonderheiten: 'Lange Wartezeit: 2 Jahre! Kleinbetriebsklausel ab unter 5 Beschaeftigten.', keinAnspruch: false },
-  { code: 'SL', name: 'Saarland', tageProJahr: 6, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '12 Monate', antragsfrist: '6 Wochen', gesetz: 'SBFG', besonderheiten: '6 Tage pro Jahr — mehr als alle anderen Bundeslaender!', keinAnspruch: false },
-  { code: 'SN', name: 'Sachsen', tageProJahr: 3, zweiJahresRegelung: false, kleinbetriebsSchwelle: 20, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'SaechsBFG (ab 2027)', besonderheiten: 'NEUES Gesetz! Ab 01.01.2027: 3 Tage/Jahr. Betriebe ≤20 Beschaeftigte koennen Erstattung beantragen.', keinAnspruch: false },
+  { code: 'SL', name: 'Saarland', tageProJahr: 6, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '12 Monate', antragsfrist: '6 Wochen', gesetz: 'SBFG', besonderheiten: '6 Tage pro Jahr — mehr als alle anderen Bundesländer!', keinAnspruch: false },
+  { code: 'SN', name: 'Sachsen', tageProJahr: 3, zweiJahresRegelung: false, kleinbetriebsSchwelle: 20, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'SaechsBFG (ab 2027)', besonderheiten: 'NEUES Gesetz! Ab 01.01.2027: 3 Tage/Jahr. Betriebe ≤20 Beschaeftigte können Erstattung beantragen.', keinAnspruch: false },
   { code: 'ST', name: 'Sachsen-Anhalt', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 5, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'BfG LSA', besonderheiten: 'Neufassung ab September 2026. Kleinbetriebsklausel ab unter 5 Beschaeftigten.', keinAnspruch: false },
   { code: 'SH', name: 'Schleswig-Holstein', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: null, wartezeit: '6 Monate', antragsfrist: '6 Wochen', gesetz: 'WBG SH', besonderheiten: '', keinAnspruch: false },
   { code: 'TH', name: 'Thueringen', tageProJahr: 5, zweiJahresRegelung: false, kleinbetriebsSchwelle: 5, wartezeit: '6 Monate', antragsfrist: '8 Wochen', gesetz: 'ThuerBfG', besonderheiten: 'Kleinbetriebsklausel ab unter 5 Beschaeftigten.', keinAnspruch: false },
 ];
 
-type Anstellungsverhaeltnis = 'angestellt' | 'selbststaendig' | 'azubi';
+type Anstellungsverhaeltnis = 'angestellt' | 'selbstständig' | 'azubi';
 
 interface AnspruchErgebnis {
   hatAnspruch: boolean;
@@ -77,7 +77,7 @@ interface AnspruchErgebnis {
 }
 
 // ============================================================
-// ANSPRUCHS-PRUEFUNG
+// ANSPRUCHS-PRÜFUNG
 // ============================================================
 
 function pruefeAnspruch(
@@ -87,13 +87,13 @@ function pruefeAnspruch(
 ): AnspruchErgebnis {
   const hinweise: string[] = [];
 
-  // Selbststaendige haben nie Anspruch
-  if (anstellung === 'selbststaendig') {
+  // Selbstständige haben nie Anspruch
+  if (anstellung === 'selbstständig') {
     return {
       hatAnspruch: false,
-      grund: 'Selbststaendige haben keinen gesetzlichen Anspruch auf Bildungsurlaub. Das Gesetz gilt nur fuer Angestellte.',
+      grund: 'Selbstständige haben keinen gesetzlichen Anspruch auf Bildungsurlaub. Das Gesetz gilt nur für Angestellte.',
       tage: null,
-      hinweise: ['Fortbildungskosten sind steuerlich absetzbar (Betriebsausgaben).', 'Aufstiegs-BAfoeg ist auch fuer Selbststaendige moeglich.'],
+      hinweise: ['Fortbildungskosten sind steuerlich absetzbar (Betriebsausgaben).', 'Aufstiegs-BAfoeg ist auch für Selbstständige möglich.'],
       gesetz: bundesland.gesetz,
       quelle: BILDUNGSURLAUB_SOURCES[bundesland.code]?.url || '',
     };
@@ -105,16 +105,16 @@ function pruefeAnspruch(
       hatAnspruch: false,
       grund: `${bundesland.name} hat kein Bildungsurlaubsgesetz. ${bundesland.besonderheiten}`,
       tage: null,
-      hinweise: ['Pruefen Sie Ihren Tarifvertrag oder Betriebsvereinbarung.', 'Arbeitgeber koennen freiwillig Bildungsurlaub gewaehren.'],
+      hinweise: ['Prüfen Sie Ihren Tarifvertrag oder Betriebsvereinbarung.', 'Arbeitgeber können freiwillig Bildungsurlaub gewaehren.'],
       gesetz: bundesland.gesetz,
       quelle: BILDUNGSURLAUB_SOURCES[bundesland.code]?.url || '',
     };
   }
 
-  // Kleinbetriebsklausel pruefen
+  // Kleinbetriebsklausel prüfen
   if (bundesland.kleinbetriebsSchwelle && betriebsgroesse < bundesland.kleinbetriebsSchwelle) {
     const grundText = bundesland.code === 'SN'
-      ? `In Sachsen (ab 2027) koennen Betriebe mit ≤20 Beschaeftigten eine Erstattung beantragen. Bei ${betriebsgroesse} Beschaeftigten greift die Erstattungsregelung.`
+      ? `In Sachsen (ab 2027) können Betriebe mit ≤20 Beschaeftigten eine Erstattung beantragen. Bei ${betriebsgroesse} Beschaeftigten greift die Erstattungsregelung.`
       : `In ${bundesland.name} besteht bei unter ${bundesland.kleinbetriebsSchwelle} Beschaeftigten KEIN Anspruch auf Bildungsurlaub (${bundesland.gesetz}).`;
 
     if (bundesland.code !== 'SN') {
@@ -125,19 +125,19 @@ function pruefeAnspruch(
         hinweise: [
           'Viele Zahnarztpraxen fallen unter diese Grenze.',
           'Alternative: Freiwillige Freistellung durch den Arbeitgeber.',
-          'Fortbildungskosten koennen steuerlich abgesetzt werden.',
-          'Aufstiegs-BAfoeg ist unabhaengig vom Bildungsurlaub moeglich.',
+          'Fortbildungskosten können steuerlich abgesetzt werden.',
+          'Aufstiegs-BAfoeg ist unabhängig vom Bildungsurlaub möglich.',
         ],
         gesetz: bundesland.gesetz,
         quelle: BILDUNGSURLAUB_SOURCES[bundesland.code]?.url || '',
       };
     }
-    hinweise.push('Erstattungsanspruch fuer Arbeitgeber bei ≤20 Beschaeftigten.');
+    hinweise.push('Erstattungsanspruch für Arbeitgeber bei ≤20 Beschaeftigten.');
   }
 
   // Azubis
   if (anstellung === 'azubi') {
-    hinweise.push('Als Auszubildende/r hast du in den meisten Bundeslaendern ebenfalls Anspruch.');
+    hinweise.push('Als Auszubildende/r hast du in den meisten Bundesländern ebenfalls Anspruch.');
   }
 
   // Anspruch besteht
@@ -146,7 +146,7 @@ function pruefeAnspruch(
   }
   hinweise.push(`Antragsfrist: ${bundesland.antragsfrist} vor Beginn der Fortbildung.`);
   hinweise.push(`Wartezeit: ${bundesland.wartezeit} nach Beginn des Arbeitsverhaeltnisses.`);
-  hinweise.push('WICHTIG: Der Kursanbieter muss die Bildungsurlaub-Anerkennung fuer dein Bundesland haben.');
+  hinweise.push('WICHTIG: Der Kursanbieter muss die Bildungsurlaub-Anerkennung für dein Bundesland haben.');
 
   return {
     hatAnspruch: true,
@@ -197,7 +197,7 @@ export const BildungsurlaubRechner = () => {
               </h2>
             </div>
             <p className="text-sm text-muted-foreground font-roboto">
-              Pruefe in 3 Schritten, ob du Anspruch auf bezahlten Bildungsurlaub hast
+              Prüfe in 3 Schritten, ob du Anspruch auf bezahlten Bildungsurlaub hast
             </p>
           </div>
 
@@ -209,7 +209,7 @@ export const BildungsurlaubRechner = () => {
             </Label>
             <Select value={selectedBundesland} onValueChange={setSelectedBundesland}>
               <SelectTrigger>
-                <SelectValue placeholder="Bundesland waehlen..." />
+                <SelectValue placeholder="Bundesland wählen..." />
               </SelectTrigger>
               <SelectContent>
                 {BUNDESLAENDER.map((bl) => (
@@ -230,7 +230,7 @@ export const BildungsurlaubRechner = () => {
             </Label>
             <Select value={betriebsgroesse} onValueChange={setBetriebsgroesse}>
               <SelectTrigger>
-                <SelectValue placeholder="Betriebsgroesse waehlen..." />
+                <SelectValue placeholder="Betriebsgroesse wählen..." />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="1">1-2 Mitarbeiter</SelectItem>
@@ -257,12 +257,12 @@ export const BildungsurlaubRechner = () => {
             </Label>
             <Select value={anstellung} onValueChange={(v) => setAnstellung(v as Anstellungsverhaeltnis)}>
               <SelectTrigger>
-                <SelectValue placeholder="Anstellungsverhaeltnis waehlen..." />
+                <SelectValue placeholder="Anstellungsverhaeltnis wählen..." />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="angestellt">Angestellt (Voll- oder Teilzeit)</SelectItem>
                 <SelectItem value="azubi">Auszubildende/r</SelectItem>
-                <SelectItem value="selbststaendig">Selbststaendig / Praxisinhaber/in</SelectItem>
+                <SelectItem value="selbstständig">Selbstständig / Praxisinhaber/in</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -274,8 +274,8 @@ export const BildungsurlaubRechner = () => {
               <div className="text-sm">
                 <p className="font-medium text-card-foreground mb-1">Rechtsverbindliche Quellen</p>
                 <p className="text-muted-foreground">
-                  Alle Angaben basieren auf den jeweiligen Landesgesetzen (Stand Maerz 2026).
-                  Bildungsurlaub existiert in 15 von 16 Bundeslaendern — nur Bayern hat kein Gesetz.
+                  Alle Angaben basieren auf den jeweiligen Landesgesetzen (Stand März 2026).
+                  Bildungsurlaub existiert in 15 von 16 Bundesländern — nur Bayern hat kein Gesetz.
                 </p>
               </div>
             </div>
@@ -358,7 +358,7 @@ export const BildungsurlaubRechner = () => {
                 <CardContent className="p-5 space-y-3">
                   <h4 className="font-medium text-card-foreground flex items-center gap-2 text-sm">
                     <AlertTriangle className="h-4 w-4 text-amber-500" />
-                    Wichtig fuer Zahnarztpraxen
+                    Wichtig für Zahnarztpraxen
                   </h4>
                   <div className="text-sm text-muted-foreground space-y-2">
                     <p>
@@ -366,7 +366,7 @@ export const BildungsurlaubRechner = () => {
                       Der <strong>Kursanbieter</strong> muss die Anerkennung pro Bundesland beantragen (25-200 EUR, 4-12 Wochen).
                     </p>
                     <p>
-                      Viele Kammer-Fortbildungen laufen ueber das Berufsrecht, nicht ueber das Bildungsurlaubssystem.
+                      Viele Kammer-Fortbildungen laufen über das Berufsrecht, nicht über das Bildungsurlaubssystem.
                       Frage vor der Buchung: <em>"Ist dieser Kurs als Bildungsurlaub in [Bundesland] anerkannt?"</em>
                     </p>
                   </div>
@@ -377,7 +377,7 @@ export const BildungsurlaubRechner = () => {
               <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30">
                 <CardContent className="p-6 text-center space-y-4">
                   <h3 className="font-montserrat text-xl font-bold text-card-foreground">
-                    Bildungsurlaub-faehige Kurse finden
+                    Bildungsurlaub-fähige Kurse finden
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     Auf KursRadar findest du Fortbildungen, die als Bildungsurlaub anerkannt sind —
@@ -396,8 +396,8 @@ export const BildungsurlaubRechner = () => {
               <div className="text-xs text-muted-foreground space-y-1 px-1">
                 <p className="font-medium">Quellen:</p>
                 <p>• {BILDUNGSURLAUB_SOURCES[selectedBundesland]?.full || 'Landesgesetz'}</p>
-                <p>• bildungsurlaub.de — Uebersicht aller Landesgesetze</p>
-                <p>• Alle Angaben Stand Maerz 2026, ohne Gewaehr</p>
+                <p>• bildungsurlaub.de — Übersicht aller Landesgesetze</p>
+                <p>• Alle Angaben Stand März 2026, ohne Gewähr</p>
               </div>
             </motion.div>
           ) : (
@@ -412,12 +412,12 @@ export const BildungsurlaubRechner = () => {
               </h3>
               <p className="text-sm text-muted-foreground/70 mt-2 max-w-sm">
                 Beantworte 3 Fragen und erfahre sofort, ob und wie viele Tage bezahlten
-                Bildungsurlaub du fuer deine Fortbildung nutzen kannst.
+                Bildungsurlaub du für deine Fortbildung nutzen kannst.
               </p>
               <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-primary">15</div>
-                  <div className="text-xs text-muted-foreground">Bundeslaender mit Gesetz</div>
+                  <div className="text-xs text-muted-foreground">Bundesländer mit Gesetz</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-primary">5-10</div>

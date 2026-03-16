@@ -67,9 +67,9 @@ export const DATA_SOURCES = {
   ORGANIZATIONAL_COSTS: "Praxismanagement-Studien der Kassenzahnärztlichen Vereinigungen und ZWP-Online",
   PATIENT_BEHAVIOR: "Branchenanalysen zur Patientenbindung in Zahnarztpraxen (ZWP-Online, Dental-Wirtschaft)",
   OPPORTUNITY_COSTS: "Betriebswirtschaftliche Kennzahlen der Dentalbranche",
-  CME_REQUIREMENTS: "§ 95d SGB V - Vertragszahnärzte müssen 125 CME-Punkte in 5 Jahren sammeln (https://www.zm-online.de/cme/cme-uebersicht, https://www.kzvlb.de/berufsausuebung/fortbildungspflicht)",
+  CME_REQUIREMENTS: "§ 95d SGB V - Vertragszahnärzte müssen 125 CME-Punkte in 5 Jahren sammeln (https://www.zm-online.de/cme/cme-übersicht, https://www.kzvlb.de/berufsausuebung/fortbildungspflicht)",
   PRACTICE_IMPACT: "Realistische Bewertung basierend auf Wochenend-/Abendfortbildungen (50% Weekend-Rate)",
-  STATISTICS_SOURCE: "Bundeszahnärztekammer (BZÄK) - Daten und Zahlen (https://www.bzaek.de/ueber-uns/daten-und-zahlen/nachgezaehlt.html)",
+  STATISTICS_SOURCE: "Bundeszahnärztekammer (BZÄK) - Daten und Zahlen (https://www.bzaek.de/über-uns/daten-und-zahlen/nachgezaehlt.html)",
   COST_STRUCTURE: "Statistisches Bundesamt - Kostenstruktur Zahnarztpraxen 2019",
   LEGAL_BASIS: "Sozialgesetzbuch (SGB V) § 95d - Fachliche Fortbildungspflicht für Vertragsärzte",
   KZV_SOURCES: "Kassenzahnärztliche Vereinigung - Fortbildungspflicht nach § 95d SGB V"

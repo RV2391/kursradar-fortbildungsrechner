@@ -85,11 +85,11 @@ export const formatTimeSavingsExplanation = ({ timeSavings }: TimeSavingsExplana
     - Nur direkte Opportunitätskosten, keine Umsatzverluste eingerechnet
     
     DATENQUELLEN:
-    - § 95d SGB V - CME-Pflicht: https://www.zm-online.de/cme/cme-uebersicht
+    - § 95d SGB V - CME-Pflicht: https://www.zm-online.de/cme/cme-übersicht
     - KZV Fortbildungspflicht: https://www.kzvlb.de/berufsausuebung/fortbildungspflicht
     - VMF Tarifvertrag ZFA 2025: https://www.vmf-online.de/zfa/zfa-tarife
     - ZWP-Online Praxismanagement: https://www.zwp-online.info/zwpnews/wirtschaft-und-recht/praxismanagement
-    - BZÄK Daten und Zahlen: https://www.bzaek.de/ueber-uns/daten-und-zahlen/nachgezaehlt.html
+    - BZÄK Daten und Zahlen: https://www.bzaek.de/über-uns/daten-und-zahlen/nachgezaehlt.html
     
     BERECHNUNGSHINWEISE:
     Diese Analyse basiert ausschließlich auf der gesetzlichen CME-Pflicht für Zahnärzte.

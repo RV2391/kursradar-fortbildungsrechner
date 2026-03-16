@@ -134,7 +134,7 @@ export const TimeSavingsBreakdown: React.FC<TimeSavingsBreakdownProps> = ({
                 <h5 className="font-medium text-primary mb-2">Flexibilitätsgewinn</h5>
                 <p className="text-sm text-gray-400">
                   Mit KursRadar findest du Online- und Hybrid-Fortbildungen, die dein Team flexibel absolvieren kann — ohne den Praxisbetrieb zu unterbrechen.
-                  Das fuehrt zu kontinuierlicher Patientenversorgung und optimierter Praxisauslastung.
+                  Das führt zu kontinuierlicher Patientenversorgung und optimierter Praxisauslastung.
                 </p>
               </div>
             </div>

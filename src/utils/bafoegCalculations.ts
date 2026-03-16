@@ -1,13 +1,13 @@
 /**
  * Aufstiegs-BAfoeg-Rechner (AFBG)
  *
- * Berechnet den Eigenanteil fuer zahnmedizinische Aufstiegsfortbildungen
+ * Berechnet den Eigenanteil für zahnmedizinische Aufstiegsfortbildungen
  * basierend auf dem Aufstiegsfortbildungsfoerderungsgesetz (AFBG).
  *
  * Quellen:
  * - BMBF: https://www.aufstiegs-bafoeg.de
  * - AFBG Gesetzestext: https://www.gesetze-im-internet.de/afbg/
- * - Stand: Maerz 2026 (letzte AFBG-Novelle 2024)
+ * - Stand: März 2026 (letzte AFBG-Novelle 2024)
  */
 
 // ============================================================
@@ -26,13 +26,13 @@ export const ZUSCHUSS_ANTEIL = 0.50;
 /** Darlehensanteil (zinsguenstig, KfW) */
 export const DARLEHEN_ANTEIL = 0.50;
 
-/** Erlass bei Bestehen der Pruefung (auf Darlehensanteil) */
+/** Erlass bei Bestehen der Prüfung (auf Darlehensanteil) */
 export const ERLASS_BEI_BESTEHEN = 0.50;
 
 /** Effektiver Foerdersatz: 50% Zuschuss + 50% Darlehen, davon 50% Erlass = 75% effektiv */
 export const EFFEKTIVER_FOERDERSATZ = 0.75;
 
-/** Materialkosten-Zuschuss (nur fuer Meisterpruefung, Zahntechnik relevant) */
+/** Materialkosten-Zuschuss (nur für Meisterpruefung, Zahntechnik relevant) */
 export const MAX_MATERIALKOSTEN = 2000;
 export const MATERIALKOSTEN_ZUSCHUSS = 0.50;
 
@@ -59,9 +59,9 @@ export interface Fortbildungstyp {
   voraussetzungen: string;
   /** AFBG-foerderfaehig? */
   afbgFoerderfaehig: boolean;
-  /** Quelle fuer Kosten */
+  /** Quelle für Kosten */
   kostenQuelle: string;
-  /** Meisterpruefung? (relevant fuer Materialkosten) */
+  /** Meisterpruefung? (relevant für Materialkosten) */
   istMeisterpruefung: boolean;
 }
 
@@ -77,7 +77,7 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
     dqrNiveau: 5,
     voraussetzungen: 'Abgeschlossene ZFA-Ausbildung, mind. 1 Jahr Berufserfahrung',
     afbgFoerderfaehig: true,
-    kostenQuelle: 'Landeszahnaerztekammern — Fortbildungsordnung, Durchschnitt ueber 17 LZKs',
+    kostenQuelle: 'Landeszahnärztekammern — Fortbildungsordnung, Durchschnitt über 17 LZKs',
     istMeisterpruefung: false,
   },
   {
@@ -91,7 +91,7 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
     dqrNiveau: 5,
     voraussetzungen: 'Abgeschlossene ZFA-Ausbildung, mind. 1 Jahr Berufserfahrung',
     afbgFoerderfaehig: true,
-    kostenQuelle: 'Landeszahnaerztekammern — Fortbildungsordnung',
+    kostenQuelle: 'Landeszahnärztekammern — Fortbildungsordnung',
     istMeisterpruefung: false,
   },
   {
@@ -105,13 +105,13 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
     dqrNiveau: 5,
     voraussetzungen: 'Abgeschlossene ZFA-Ausbildung, mind. 1 Jahr Berufserfahrung',
     afbgFoerderfaehig: true,
-    kostenQuelle: 'Landeszahnaerztekammern — Fortbildungsordnung',
+    kostenQuelle: 'Landeszahnärztekammern — Fortbildungsordnung',
     istMeisterpruefung: false,
   },
   {
     id: 'dh',
     name: 'DH — Dentalhygienikerin (Bachelor Professional)',
-    description: 'Hoechste Aufstiegsqualifikation, DQR-Niveau 6, eigenstaendige Prophylaxe',
+    description: 'Höchste Aufstiegsqualifikation, DQR-Niveau 6, eigenstaendige Prophylaxe',
     typischeKosten: 15000,
     dauerMonate: 18,
     unterrichtsstunden: 950,
@@ -124,7 +124,7 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
   },
   {
     id: 'fzp',
-    name: 'FZP — Fachzahnarzthelfer/in fuer Zahnaerztliches Praxismanagement',
+    name: 'FZP — Fachzahnarzthelfer/in für Zahnärztliches Praxismanagement',
     description: 'Alternative zum ZMV mit erweitertem Praxismanagement-Fokus',
     typischeKosten: 4000,
     dauerMonate: 12,
@@ -133,7 +133,7 @@ export const FORTBILDUNGSTYPEN: Fortbildungstyp[] = [
     dqrNiveau: 6,
     voraussetzungen: 'Abgeschlossene ZFA-Ausbildung, mind. 3 Jahre Berufserfahrung',
     afbgFoerderfaehig: true,
-    kostenQuelle: 'Zahnaerztekammern mit FZP-Angebot',
+    kostenQuelle: 'Zahnärztekammern mit FZP-Angebot',
     istMeisterpruefung: false,
   },
   {
