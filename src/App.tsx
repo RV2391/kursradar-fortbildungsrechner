@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Embed from "./pages/Embed";
 import Provider from "./pages/Provider";
+import BAfoeg from "./pages/BAfoeg";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/anbieter" element={<Provider />} />
+          <Route path="/bafoeg" element={<BAfoeg />} />
           <Route path="/embed" element={<Embed />} />
         </Routes>
       </BrowserRouter>
