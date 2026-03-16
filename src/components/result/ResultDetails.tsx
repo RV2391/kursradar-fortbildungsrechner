@@ -122,7 +122,7 @@ export const ResultDetails = ({
                 <span className="text-white">8 Punkte pro Tag</span>
               </div>
               <div className="flex justify-between text-xs">
-                <span className="text-gray-400">Mit Crocodile</span>
+                <span className="text-gray-400">Mit KursRadar (Online)</span>
                 <span className="text-white">1-3 Punkte pro Einheit</span>
               </div>
             </div>

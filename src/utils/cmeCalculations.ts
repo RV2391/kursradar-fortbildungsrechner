@@ -54,8 +54,9 @@ export const calculateAnnualCMERequirements = (
   };
 };
 
-// Beispiel für eine typische Fortbildungseinheit bei Crocodile
-export const TYPICAL_CROCODILE_UNIT: CMEUnit = {
+// Typische Online-Fortbildungseinheit (ueber KursRadar auffindbar)
+// Quelle: Durchschnittswerte CME-zertifizierter Online-Kurse (Dental Online College, ZWP Study Club)
+export const TYPICAL_ONLINE_UNIT: CMEUnit = {
   duration: 45, // 45 Minuten pro Einheit
   hasExercises: true,
   hasTest: true

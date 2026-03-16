@@ -338,7 +338,7 @@ export const ProviderLeadForm = ({ inputs, results }: ProviderLeadFormProps) => 
                 Ich bin damit einverstanden, dass meine Daten zur Kontaktaufnahme und Beratung verarbeitet werden. 
                 Die Daten werden DSGVO-konform gespeichert. Weitere Informationen finden Sie in unserer{' '}
                 <a
-                  href="https://www.crocodile.de/datenschutz"
+                  href="https://www.kurs-radar.com/datenschutz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"

@@ -3,7 +3,7 @@ import { calculateNearestInstitute } from '../dentalInstitutes';
 import { 
   calculateAnnualCMERequirements, 
   TYPICAL_TRADITIONAL_UNIT, 
-  TYPICAL_CROCODILE_UNIT 
+  TYPICAL_ONLINE_UNIT
 } from '../cmeCalculations';
 import { CalculationInputs } from './types';
 import type { Results, TimeSavings, TimeSavingsDetails } from '../../types';

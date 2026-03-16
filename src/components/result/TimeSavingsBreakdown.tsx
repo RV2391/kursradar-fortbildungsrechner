@@ -133,8 +133,8 @@ export const TimeSavingsBreakdown: React.FC<TimeSavingsBreakdownProps> = ({
               <div className="bg-[#2a2a2a] p-4 rounded-lg border border-gray-600">
                 <h5 className="font-medium text-primary mb-2">Flexibilitätsgewinn</h5>
                 <p className="text-sm text-gray-400">
-                  Mit Crocodile können deine Mitarbeiter flexibel lernen, ohne den Praxisbetrieb zu unterbrechen. 
-                  Dies führt zu einer kontinuierlichen Patientenversorgung und optimiert deine Praxisauslastung.
+                  Mit KursRadar findest du Online- und Hybrid-Fortbildungen, die dein Team flexibel absolvieren kann — ohne den Praxisbetrieb zu unterbrechen.
+                  Das fuehrt zu kontinuierlicher Patientenversorgung und optimierter Praxisauslastung.
                 </p>
               </div>
             </div>
@@ -178,32 +178,32 @@ export const TimeSavingsBreakdown: React.FC<TimeSavingsBreakdownProps> = ({
                 </div>
 
                 <div className="bg-[#1a1a1a] p-4 rounded-lg border border-green-700/50">
-                  <h5 className="font-medium text-green-400 mb-3">Crocodile Online-Fortbildung</h5>
+                  <h5 className="font-medium text-green-400 mb-3">Optimiert mit KursRadar</h5>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Arbeitszeit Personal:</span>
-                      <span className="text-white">{formatCurrency(breakdown.crocodileCosts.trainingTime)}</span>
+                      <span className="text-white">{formatCurrency(breakdown.optimizedCosts.trainingTime)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Reisezeit:</span>
-                      <span className="text-white">{formatCurrency(breakdown.crocodileCosts.travelTime)}</span>
+                      <span className="text-white">{formatCurrency(breakdown.optimizedCosts.travelTime)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Vor-/Nachbereitung:</span>
-                      <span className="text-white">{formatCurrency(breakdown.crocodileCosts.preparationTime)}</span>
+                      <span className="text-white">{formatCurrency(breakdown.optimizedCosts.preparationTime)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Praxisschließung:</span>
-                      <span className="text-white">{formatCurrency(breakdown.crocodileCosts.practiceClosureImpact)}</span>
+                      <span className="text-white">{formatCurrency(breakdown.optimizedCosts.practiceClosureImpact)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Organisation:</span>
-                      <span className="text-white">{formatCurrency(breakdown.crocodileCosts.organizationalCosts)}</span>
+                      <span className="text-white">{formatCurrency(breakdown.optimizedCosts.organizationalCosts)}</span>
                     </div>
                     <div className="border-t border-gray-600 pt-2 mt-2">
                       <div className="flex justify-between font-medium">
                         <span className="text-white">Gesamtkosten:</span>
-                        <span className="text-green-400">{formatCurrency(breakdown.crocodileCosts.totalCrocodileImpact)}</span>
+                        <span className="text-green-400">{formatCurrency(breakdown.optimizedCosts.totalOptimizedImpact)}</span>
                       </div>
                     </div>
                   </div>
@@ -214,7 +214,7 @@ export const TimeSavingsBreakdown: React.FC<TimeSavingsBreakdownProps> = ({
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-medium text-white">Jährliche Gesamtersparnis:</span>
                   <span className="text-2xl font-bold text-primary">
-                    {formatCurrency(breakdown.traditionalCosts.totalTraditionalImpact - breakdown.crocodileCosts.totalCrocodileImpact)}
+                    {formatCurrency(breakdown.traditionalCosts.totalTraditionalImpact - breakdown.optimizedCosts.totalOptimizedImpact)}
                   </span>
                 </div>
               </div>

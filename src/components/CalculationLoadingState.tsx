@@ -39,12 +39,12 @@ export const CalculationLoadingState: React.FC<CalculationLoadingStateProps> = (
   return (
     <Card className="w-full bg-[#2a2a2a] border-gray-700">
       <div className="p-8 text-center">
-        {/* Crocodile Logo Animation */}
+        {/* KursRadar Logo Animation */}
         <div className="mb-6 relative">
           <div className="relative mx-auto w-20 h-20 mb-4">
-            <img 
-              src="/lovable-uploads/818d3c15-58b1-498e-a2af-fa2546da9b70.png" 
-              alt="Crocodile Logo" 
+            <img
+              src="/lovable-uploads/818d3c15-58b1-498e-a2af-fa2546da9b70.png"
+              alt="KursRadar Logo" 
               className={`w-full h-full transition-transform duration-300 ${
                 animationStep % 4 === 0 ? 'scale-110' : 'scale-100'
               }`}

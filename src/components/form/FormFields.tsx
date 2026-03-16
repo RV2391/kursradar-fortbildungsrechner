@@ -67,7 +67,7 @@ export const FormFields = ({
           <br /><br />
           Ich möchte regelmäßig Neuigkeiten und Informationen zu Angeboten erhalten. Du kannst diese Benachrichtigungen jederzeit abbestellen. Weitere Informationen zum Abbestellen und zu unseren Datenschutzverfahren, findest du in unserer{" "}
           <a 
-            href="https://www.crocodile.de/datenschutz" 
+            href="https://www.kurs-radar.com/datenschutz" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-primary hover:underline font-medium"

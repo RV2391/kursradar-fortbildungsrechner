@@ -27,13 +27,13 @@ export interface ExtendedTimeSavings extends TimeSavings {
       organizationalCosts: number;
       totalTraditionalImpact: number;
     };
-    crocodileCosts: {
+    optimizedCosts: {
       trainingTime: number;
       travelTime: number;
       preparationTime: number;
       practiceClosureImpact: number;
       organizationalCosts: number;
-      totalCrocodileImpact: number;
+      totalOptimizedImpact: number;
     };
   };
   sources: typeof DATA_SOURCES;
@@ -52,20 +52,20 @@ export const calculateExtendedTimeSavings = (
   const traditionalDentistTimePerSession = 8 + travelTimeHours + PREPARATION_TIME;
   const traditionalAssistantTimePerSession = 8 + travelTimeHours + PREPARATION_TIME;
   
-  // Crocodile Online-Fortbildung - Berechnung pro Session  
-  const crocodileDentistTimePerSession = 3 + 0 + 0.5; // 3h Training + 0h Reise + 0.5h Prep
-  const crocodileAssistantTimePerSession = 3 + 0 + 0.5;
+  // Optimierte Fortbildung (Online/Hybrid via KursRadar) - Berechnung pro Session
+  const optimizedDentistTimePerSession = 3 + 0 + 0.5; // 3h Training + 0h Reise + 0.5h Prep
+  const optimizedAssistantTimePerSession = 3 + 0 + 0.5;
   
   // Gesamte Zeitaufwände pro Jahr
   const traditionalDentistHours = traditionalDentistTimePerSession * traditionalDentistCME.requiredSessions * dentists;
   const traditionalAssistantHours = traditionalAssistantTimePerSession * traditionalAssistantCME.requiredSessions * assistants;
   
-  const crocodileDentistHours = crocodileDentistTimePerSession * traditionalDentistCME.requiredSessions * dentists;
-  const crocodileAssistantHours = crocodileAssistantTimePerSession * traditionalAssistantCME.requiredSessions * assistants;
+  const optimizedDentistHours = optimizedDentistTimePerSession * traditionalDentistCME.requiredSessions * dentists;
+  const optimizedAssistantHours = optimizedAssistantTimePerSession * traditionalAssistantCME.requiredSessions * assistants;
   
   // Zeitersparnis berechnen
-  const dentistHoursSaved = traditionalDentistHours - crocodileDentistHours;
-  const assistantHoursSaved = traditionalAssistantHours - crocodileAssistantHours;
+  const dentistHoursSaved = traditionalDentistHours - optimizedDentistHours;
+  const assistantHoursSaved = traditionalAssistantHours - optimizedAssistantHours;
   const totalHoursSaved = dentistHoursSaved + assistantHoursSaved;
   
   // Praxisschließung und deren Auswirkungen
@@ -105,15 +105,15 @@ export const calculateExtendedTimeSavings = (
   };
   traditionalCosts.totalTraditionalImpact = Object.values(traditionalCosts).reduce((sum, cost) => sum + cost, 0) - traditionalCosts.totalTraditionalImpact;
   
-  const crocodileCosts = {
-    trainingTime: (crocodileDentistHours * DENTIST_HOURLY_RATE) + (crocodileAssistantHours * ASSISTANT_HOURLY_RATE),
+  const optimizedCosts = {
+    trainingTime: (optimizedDentistHours * DENTIST_HOURLY_RATE) + (optimizedAssistantHours * ASSISTANT_HOURLY_RATE),
     travelTime: 0,
     preparationTime: (0.5 * (traditionalDentistCME.requiredSessions * dentists + traditionalAssistantCME.requiredSessions * assistants) * DENTIST_HOURLY_RATE),
     practiceClosureImpact: 0,
     organizationalCosts: 0,
-    totalCrocodileImpact: 0 // wird unten berechnet
+    totalOptimizedImpact: 0 // wird unten berechnet
   };
-  crocodileCosts.totalCrocodileImpact = Object.values(crocodileCosts).reduce((sum, cost) => sum + cost, 0) - crocodileCosts.totalCrocodileImpact;
+  optimizedCosts.totalOptimizedImpact = Object.values(optimizedCosts).reduce((sum, cost) => sum + cost, 0) - optimizedCosts.totalOptimizedImpact;
   
   return {
     totalHoursPerYear: totalHoursSaved,
@@ -152,7 +152,7 @@ export const calculateExtendedTimeSavings = (
     },
     breakdown: {
       traditionalCosts,
-      crocodileCosts
+      optimizedCosts
     },
     sources: DATA_SOURCES
   };

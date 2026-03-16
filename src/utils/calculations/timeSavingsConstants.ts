@@ -11,7 +11,7 @@ export const TIME_SAVINGS_CONSTANTS = {
     FULL_DAY_TRADITIONAL: 8,    // Ganztägige Präsenzfortbildung
     HALF_DAY_TRADITIONAL: 4,    // Halbtägige Präsenzfortbildung
     AVERAGE_TRADITIONAL: 5,     // Durchschnittliche Präsenzfortbildung
-    CROCODILE_ONLINE: 0         // Keine Praxisschließung bei Online-Fortbildung
+    ONLINE_TRAINING: 0          // Keine Praxisschliessung bei Online-Fortbildung
   },
   
   // Praxisausfall-Faktoren (degressive Skalierung nach Teamgröße)

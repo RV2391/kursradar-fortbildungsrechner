@@ -8,7 +8,7 @@ import {
   ASSISTANTS_PER_CAR
 } from './constants';
 
-export const calculateCrocodileCosts = (teamSize: number): number => {
+export const calculateOptimizedPlatformCosts = (teamSize: number): number => {
   if (teamSize <= BASE_USERS_INCLUDED) {
     return BASE_PRICE;
   }
