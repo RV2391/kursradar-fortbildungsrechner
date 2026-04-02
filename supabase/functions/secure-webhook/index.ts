@@ -18,19 +18,8 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const supabase = createClient(supabaseUrl, supabaseKey)
 
-    // Get webhook URL from secrets
-    const webhookUrl = Deno.env.get('MAKE_WEBHOOK_URL')!
-    
-    if (!webhookUrl) {
-      console.error('🚨 MAKE_WEBHOOK_URL not configured')
-      return new Response(
-        JSON.stringify({ error: 'Webhook URL not configured' }), 
-        { 
-          status: 500, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
-    }
+    // Get n8n webhook URL from secrets
+    const webhookUrl = Deno.env.get('N8N_WEBHOOK_URL')
 
     // Parse request body
     const requestData = await req.json()
@@ -98,53 +87,40 @@ serve(async (req) => {
 
     console.log('✅ Form submission stored in database')
 
-    // Forward to Make.com webhook with rate limiting check
-    try {
-      console.log('🔄 Forwarding to Make.com webhook...')
-      
-      const webhookResponse = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'Supabase-Edge-Function/1.0'
-        },
-        body: JSON.stringify(sanitizedData)
-      })
+    // Forward to n8n webhook for lead processing
+    if (webhookUrl) {
+      try {
+        console.log('🔄 Forwarding to n8n webhook...')
 
-      if (!webhookResponse.ok) {
-        console.error('❌ Webhook failed:', webhookResponse.status, await webhookResponse.text())
-        return new Response(
-          JSON.stringify({ error: 'Webhook delivery failed' }), 
-          { 
-            status: 502, 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-          }
-        )
+        const webhookResponse = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': 'Supabase-Edge-Function/1.0'
+          },
+          body: JSON.stringify(sanitizedData)
+        })
+
+        if (!webhookResponse.ok) {
+          console.error('❌ n8n webhook failed:', webhookResponse.status, await webhookResponse.text())
+        } else {
+          console.log('✅ n8n webhook delivered successfully')
+        }
+      } catch (webhookError) {
+        console.error('❌ n8n webhook delivery error:', webhookError)
       }
-
-      console.log('✅ Webhook delivered successfully')
-
-      return new Response(
-        JSON.stringify({ 
-          success: true, 
-          message: 'Form submitted successfully' 
-        }), 
-        { 
-          status: 200, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
-
-    } catch (webhookError) {
-      console.error('❌ Webhook delivery error:', webhookError)
-      return new Response(
-        JSON.stringify({ error: 'Webhook delivery failed' }), 
-        { 
-          status: 502, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
     }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: 'Form submitted successfully'
+      }),
+      {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    )
 
   } catch (error) {
     console.error('❌ Unexpected error:', error)

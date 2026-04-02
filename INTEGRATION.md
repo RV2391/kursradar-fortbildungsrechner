@@ -57,7 +57,7 @@ und wird per iframe eingebettet.
 - Mindesthoehe 1200px (inkl. Ergebnis + Formular), idealerweise dynamisch per `postMessage`
 - HTTPS erforderlich (Mixed Content wird geblockt)
 - CSP: `frame-src https://rechner.kurs-radar.com` muss erlaubt sein
-- Supabase-Domain fuer Autocomplete: `https://vkarnxgrniqtyeeibgxq.supabase.co`
+- Supabase-Domain fuer Autocomplete: `https://jkandfizerwyimccwrov.supabase.co`
 
 ### Option B: Direkter Link
 

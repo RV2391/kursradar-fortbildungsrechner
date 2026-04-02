@@ -9,11 +9,11 @@ export const calculateDistanceViaBackend = async (
   console.log('🗺️ Calculating driving distance via backend');
   
   try {
-    const response = await fetch('https://vkarnxgrniqtyeeibgxq.supabase.co/functions/v1/maps-api', {
+    const response = await fetch('https://jkandfizerwyimccwrov.supabase.co/functions/v1/maps-api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYXJueGdybmlxdHllZWliZ3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwODYwNjUsImV4cCI6MjA2ODY2MjA2NX0.ULXL4SIwqXzzRWkxW15MO3OCkVfGlEvJ-NQ0_cnI9y8`
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprYW5kZml6ZXJ3eWltY2N3cm92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MDIwNjAsImV4cCI6MjA4NTE3ODA2MH0.lllYRiYnHzsUCMTeXrhPSh1A9W8i1oFYMfEF34VTQHY`
       },
       body: JSON.stringify({
         action: 'route-calculation',
@@ -64,11 +64,11 @@ export const calculateTravelTimeViaBackend = async (
   console.log('🚗 Calculating travel time via backend');
   
   try {
-    const response = await fetch('https://vkarnxgrniqtyeeibgxq.supabase.co/functions/v1/maps-api', {
+    const response = await fetch('https://jkandfizerwyimccwrov.supabase.co/functions/v1/maps-api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYXJueGdybmlxdHllZWliZ3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwODYwNjUsImV4cCI6MjA2ODY2MjA2NX0.ULXL4SIwqXzzRWkxW15MO3OCkVfGlEvJ-NQ0_cnI9y8`
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprYW5kZml6ZXJ3eWltY2N3cm92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MDIwNjAsImV4cCI6MjA4NTE3ODA2MH0.lllYRiYnHzsUCMTeXrhPSh1A9W8i1oFYMfEF34VTQHY`
       },
       body: JSON.stringify({
         action: 'route-calculation',
