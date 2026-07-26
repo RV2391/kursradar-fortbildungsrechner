@@ -1,23 +1,18 @@
 
 import { calculateNearestInstitute } from '../dentalInstitutes';
-import { 
-  calculateAnnualCMERequirements, 
-  TYPICAL_TRADITIONAL_UNIT, 
+import {
+  calculateAnnualCMERequirements,
+  TYPICAL_TRADITIONAL_UNIT,
   TYPICAL_ONLINE_UNIT
 } from '../cmeCalculations';
 import { CalculationInputs } from './types';
-import type { Results, TimeSavings, TimeSavingsDetails } from '../../types';
+import type { Results, TimeSavings, TimeSavingsDetails, NearestInstitute } from '../../types';
 import { calculateExtendedTimeSavings, type ExtendedTimeSavings } from './extendedTimeSavingsCalculations';
-import { 
+import { calculateOptimizedCosts, calculateTravelCosts } from './costCalculations';
+import {
   DENTIST_ANNUAL_COST,
   ASSISTANT_ANNUAL_COST,
   ASSISTANTS_PER_CAR,
-  BASE_USERS_INCLUDED,
-  ADDITIONAL_USER_BLOCK_SIZE,
-  COST_PER_ADDITIONAL_BLOCK_MONTHLY,
-  BASE_PRICE,
-  COST_PER_KM,
-  MONTHS_PER_YEAR,
   DENTIST_HOURLY_RATE,
   ASSISTANT_HOURLY_RATE,
   PREPARATION_TIME
@@ -28,24 +23,8 @@ export interface ExtendedResults extends Results {
   extendedTimeSavings?: ExtendedTimeSavings;
 }
 
-const calculateOptimizedCosts = (teamSize: number): number => {
-  if (teamSize <= BASE_USERS_INCLUDED) {
-    return BASE_PRICE;
-  }
-  
-  const additionalUsers = teamSize - BASE_USERS_INCLUDED;
-  const additionalBlocks = Math.ceil(additionalUsers / ADDITIONAL_USER_BLOCK_SIZE);
-  const annualAdditionalCosts = additionalBlocks * COST_PER_ADDITIONAL_BLOCK_MONTHLY * MONTHS_PER_YEAR;
-  return BASE_PRICE + annualAdditionalCosts;
-};
-
-const calculateTravelCosts = (distance: number, dentists: number, assistants: number): number => {
-  const dentistsCosts = distance * COST_PER_KM * dentists;
-  const assistantGroups = Math.ceil(assistants / ASSISTANTS_PER_CAR);
-  const assistantsCosts = distance * COST_PER_KM * assistantGroups;
-  
-  return Math.round(dentistsCosts + assistantsCosts);
-};
+// Re-export NearestInstitute so consumers can import from '@/utils/calculations'
+export type { NearestInstitute } from '../../types';
 
 const calculateTimeSavings = (
   dentists: number,
@@ -218,13 +197,15 @@ export const calculateResults = async (inputs: CalculationInputs): Promise<Exten
     }
   }
 
-  const totalTraditionalCosts = traditionalCostsDentists + traditionalCostsAssistants + 
+  const totalTraditionalCosts = traditionalCostsDentists + traditionalCostsAssistants +
     (nearestInstitute?.travelCosts || 0);
-  
-  const optimizedCosts = calculateOptimizedCosts(inputs.teamSize);
-  
+
+  const { optimizedCosts, breakdown } = calculateOptimizedCosts(totalTraditionalCosts);
+
   const savings = totalTraditionalCosts - optimizedCosts;
-  const savingsPercentage = (savings / totalTraditionalCosts) * 100;
+  const savingsPercentage = totalTraditionalCosts > 0
+    ? (savings / totalTraditionalCosts) * 100
+    : 0;
 
   return {
     traditionalCostsDentists,
@@ -235,16 +216,13 @@ export const calculateResults = async (inputs: CalculationInputs): Promise<Exten
     savingsPercentage,
     nearestInstitute,
     timeSavings,
+    optimizationBreakdown: breakdown,
     extendedTimeSavings
   } as ExtendedResults;
 };
 
-export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(amount);
-};
+// Re-export helpers from costCalculations so consumers can keep importing from '@/utils/calculations'
+export { formatCurrency } from './costCalculations';
 
 // Export types for use in components
 export type { CalculationInputs } from './types';

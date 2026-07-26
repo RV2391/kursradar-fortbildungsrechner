@@ -50,6 +50,15 @@ export interface OptimizationBreakdown {
   platformCost: number;
 }
 
+export interface NearestInstitute {
+  name: string;
+  distance: number;
+  oneWayDistance: number;
+  travelTime: number;
+  oneWayTravelTime: number;
+  travelCosts: number;
+}
+
 export interface Results {
   traditionalCostsDentists: number;
   traditionalCostsAssistants: number;
@@ -59,14 +68,7 @@ export interface Results {
   savingsPercentage: number;
   timeSavings?: TimeSavings;
   optimizationBreakdown?: OptimizationBreakdown;
-  nearestInstitute?: {
-    name: string;
-    distance: number;
-    oneWayDistance: number;
-    travelTime: number;
-    oneWayTravelTime: number;
-    travelCosts: number;
-  };
+  nearestInstitute?: NearestInstitute;
 }
 
 declare global {

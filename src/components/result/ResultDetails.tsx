@@ -1,6 +1,14 @@
 import { formatCurrency } from "@/utils/calculations";
 import type { NearestInstitute } from "@/utils/calculations";
 import type { TimeSavings } from "@/types";
+import { Info } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { INDUSTRY_SOURCES } from "@/utils/sources";
 
 interface ResultDetailsProps {
   traditionalCostsDentists: number;
@@ -58,13 +66,34 @@ export const ResultDetails = ({
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-400">Monetärer Wert der Zeit</span>
+              <span className="text-gray-400 inline-flex items-center gap-1">
+                Monetärer Wert der Zeit
+                <TooltipProvider delayDuration={100}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        aria-label="Erklärung Opportunitätskosten"
+                        className="text-gray-500 hover:text-primary transition-colors"
+                      >
+                        <Info className="h-3.5 w-3.5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-xs text-xs leading-relaxed">
+                      <p className="font-medium mb-1">Konservativer Ansatz:</p>
+                      <p>80 €/h Zahnarzt (Quelle: {INDUSTRY_SOURCES.ZAHNARZT_STUNDENSATZ.short}, KZBV-Jahrbuch).</p>
+                      <p>20 €/h ZFA (Quelle: {INDUSTRY_SOURCES.ZFA_TARIFVERTRAG.short}, VMF Tarifvertrag 2025 / TVöD-VKA E5-Äquivalent).</p>
+                      <p className="mt-1 text-muted-foreground">Nur direkte Opportunitätskosten, ohne Umsatzausfall.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </span>
               <span className="font-medium text-white">
                 {formatCurrency(timeSavings.totalMonetaryValue)}
               </span>
             </div>
             <div className="text-xs text-gray-500 mt-2">
-              * Basierend auf durchschnittlichen Stundensätzen und Reisezeiten
+              * Konservativer Ansatz: 80 €/h Zahnarzt, 20 €/h ZFA. Ohne Umsatzausfall. Quellen im Tooltip.
             </div>
           </div>
         </div>
