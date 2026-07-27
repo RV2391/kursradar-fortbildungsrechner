@@ -23,6 +23,7 @@ import { AddressComponents } from "@/types";
 import { useToast } from "@/hooks/use-toast";
 import { ExtendedTimeSavings } from "@/utils/calculations/extendedTimeSavingsCalculations";
 import { useGTMTracking } from "@/hooks/useGTMTracking";
+import { usePlatformStats } from "@/hooks/usePlatformStats";
 
 // Extended results interface
 interface ExtendedResults extends Results {
@@ -71,6 +72,10 @@ export const CostCalculator = () => {
     trackTimeSavingsViewed
   } = useGTMTracking();
 
+  // Live-Zahlen aus platform-stats (Anteil kostenloser/gesponsorter Kurse etc.).
+  // Faellt still auf Konstanten zurueck, wenn Endpoint nicht erreichbar ist.
+  const { stats: platformStats } = usePlatformStats();
+
   useEffect(() => {
     const updateResults = async () => {
       setIsCalculating(true);
@@ -87,7 +92,10 @@ export const CostCalculator = () => {
           await new Promise(resolve => setTimeout(resolve, 500));
         }
         
-        const newResults = await calculateResults(inputs) as ExtendedResults;
+        const newResults = await calculateResults(inputs, {
+          freeCoursePercentage: platformStats.free_or_sponsored_pct,
+          priceOptimizationFactor: platformStats.price_optimization_factor,
+        }) as ExtendedResults;
         setResults(newResults);
         sessionStorage.setItem('calculatorData', JSON.stringify({
           ...inputs,
@@ -119,7 +127,7 @@ export const CostCalculator = () => {
       }
     };
     updateResults();
-  }, [inputs, trackCalculationCompleted, toast]);
+  }, [inputs, platformStats.free_or_sponsored_pct, platformStats.price_optimization_factor, trackCalculationCompleted, toast]);
 
   const handleSelectChange = (field: keyof CalculationInputs) => (value: string) => {
     const numericValue = parseInt(value, 10);

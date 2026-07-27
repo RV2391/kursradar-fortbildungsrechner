@@ -12,18 +12,28 @@ import type { OptimizationBreakdown } from '../../types';
  * Optimierte Kosten mit KursRadar (kostenlose Plattform-Nutzung fuer Praxen).
  *
  * Ersparnis kommt aus zwei Quellen:
- * 1. Kostenlose/gesponsorte Kurse (FREE_COURSE_PERCENTAGE der traditionellen Kosten fallen weg)
- * 2. Preisoptimierung durch Transparenz (PRICE_OPTIMIZATION_FACTOR auf den Rest)
+ * 1. Kostenlose/gesponsorte Kurse (freePct der traditionellen Kosten fallen weg)
+ * 2. Preisoptimierung durch Transparenz (priceOptFactor auf den Rest)
  *
- * Beide Faktoren sind aktuell Konstanten. Ab A-P0-3 werden sie aus der
- * platform-stats Edge Function dynamisch aus der Live-Content-DB berechnet.
+ * Optionaler `overrides`-Parameter kommt aus der platform-stats Edge Function
+ * (Live-Content-DB). Wenn nicht uebergeben, werden die statischen Konstanten
+ * benutzt (Fallback-Verhalten fuer dev/embed-Kontext ohne Live-Fetch).
  */
+export interface OptimizedCostOverrides {
+  freeCoursePercentage?: number;
+  priceOptimizationFactor?: number;
+}
+
 export const calculateOptimizedCosts = (
-  traditionalCosts: number
+  traditionalCosts: number,
+  overrides?: OptimizedCostOverrides,
 ): { optimizedCosts: number; breakdown: OptimizationBreakdown } => {
-  const freeCoursesSavings = traditionalCosts * FREE_COURSE_PERCENTAGE;
+  const freePct = overrides?.freeCoursePercentage ?? FREE_COURSE_PERCENTAGE;
+  const priceOptFactor = overrides?.priceOptimizationFactor ?? PRICE_OPTIMIZATION_FACTOR;
+
+  const freeCoursesSavings = traditionalCosts * freePct;
   const remainingCosts = traditionalCosts - freeCoursesSavings;
-  const priceOptimizationSavings = remainingCosts * PRICE_OPTIMIZATION_FACTOR;
+  const priceOptimizationSavings = remainingCosts * priceOptFactor;
   const platformCost = KURSRADAR_PLATFORM_COST;
 
   const optimizedCosts = traditionalCosts - freeCoursesSavings - priceOptimizationSavings + platformCost;

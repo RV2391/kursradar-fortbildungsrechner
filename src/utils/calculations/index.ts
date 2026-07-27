@@ -8,7 +8,7 @@ import {
 import { CalculationInputs } from './types';
 import type { Results, TimeSavings, TimeSavingsDetails, NearestInstitute } from '../../types';
 import { calculateExtendedTimeSavings, type ExtendedTimeSavings } from './extendedTimeSavingsCalculations';
-import { calculateOptimizedCosts, calculateTravelCosts } from './costCalculations';
+import { calculateOptimizedCosts, calculateTravelCosts, type OptimizedCostOverrides } from './costCalculations';
 import {
   DENTIST_ANNUAL_COST,
   ASSISTANT_ANNUAL_COST,
@@ -87,7 +87,10 @@ const calculateTimeSavings = (
   };
 };
 
-export const calculateResults = async (inputs: CalculationInputs): Promise<ExtendedResults> => {
+export const calculateResults = async (
+  inputs: CalculationInputs,
+  overrides?: OptimizedCostOverrides,
+): Promise<ExtendedResults> => {
   const assistants = inputs.teamSize - inputs.dentists;
   
   const traditionalDentistCME = calculateAnnualCMERequirements(
@@ -200,7 +203,7 @@ export const calculateResults = async (inputs: CalculationInputs): Promise<Exten
   const totalTraditionalCosts = traditionalCostsDentists + traditionalCostsAssistants +
     (nearestInstitute?.travelCosts || 0);
 
-  const { optimizedCosts, breakdown } = calculateOptimizedCosts(totalTraditionalCosts);
+  const { optimizedCosts, breakdown } = calculateOptimizedCosts(totalTraditionalCosts, overrides);
 
   const savings = totalTraditionalCosts - optimizedCosts;
   const savingsPercentage = totalTraditionalCosts > 0

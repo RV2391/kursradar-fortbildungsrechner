@@ -7,6 +7,7 @@ import { ResultDetails } from "./result/ResultDetails";
 import { TimeSavingsBreakdown } from "./result/TimeSavingsBreakdown";
 import { CustomForm } from "./CustomForm";
 import { useGTMTracking } from "@/hooks/useGTMTracking";
+import { usePlatformStats } from "@/hooks/usePlatformStats";
 import { ArrowRight } from "lucide-react";
 
 // Extended results interface
@@ -26,6 +27,10 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   addressComponents
 }) => {
   const { trackEvent } = useGTMTracking();
+  const { stats: platformStats } = usePlatformStats();
+
+  const freePct = Math.round(platformStats.free_or_sponsored_pct * 100);
+  const pricePct = Math.round(platformStats.price_optimization_factor * 100);
 
   const handleSignupClick = () => {
     trackEvent({
@@ -107,10 +112,18 @@ export const ResultCard: React.FC<ResultCardProps> = ({
                 <h4 className="mb-2 font-montserrat font-medium text-card-foreground">So setzt sich dein Einsparpotenzial zusammen:</h4>
                 <ul className="list-disc pl-4 space-y-2">
                   <li>
-                    <strong>Kostenlose Kurse (30%):</strong> Über KursRadar findest du gesponserte Webinare und kostenfreie Fortbildungen, die du bei der Suche auf einzelnen Websites oft übersiehst.
+                    <strong>Kostenlose & gesponserte Kurse ({freePct}%):</strong>{" "}
+                    Aktuell sind <strong>{platformStats.free_or_sponsored_count} von{" "}
+                    {platformStats.total_upcoming_count}</strong> kommenden Kursen auf
+                    KursRadar kostenlos oder gesponsert &mdash; Webinare und Präsenz-Formate,
+                    die du bei der Suche auf einzelnen Anbieter-Websites oft übersiehst.
+                    {platformStats.is_fallback && (
+                      <span className="text-xs text-muted-foreground/60 ml-1">(Stand cached)</span>
+                    )}
                   </li>
                   <li>
-                    <strong>Preisoptimierung (15%):</strong> Durch den transparenten Preisvergleich findest du günstigere Alternativen für die gleichen Inhalte.
+                    <strong>Preisoptimierung ({pricePct}%):</strong> Durch den transparenten
+                    Preisvergleich findest du günstigere Alternativen für die gleichen Inhalte.
                   </li>
                   {results.nearestInstitute && (
                     <li>
