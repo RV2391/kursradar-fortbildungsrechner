@@ -227,7 +227,7 @@ export const BUNDESLAENDER: BundeslandInfo[] = [
     zweiJahresRegelung: false,
     kleinbetriebsSchwelle: null,
     ueberforderungsSchutzSchwelle: null,
-    wartezeit: '12 Monate',
+    wartezeit: '6 Monate',
     antragsfrist: '6 Wochen',
     gesetz: 'SBFG',
     besonderheiten: 'Seit SBFG-Novelle vom 09.05.2024: 5 Tage vollständig bezahlt (zuvor 6 Tage nominell, aber ab Tag 3 Eigenanteil).',
