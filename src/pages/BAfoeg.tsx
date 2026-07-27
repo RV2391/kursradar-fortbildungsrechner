@@ -1,8 +1,14 @@
 import { BAfoegRechner } from "@/components/bafoeg/BAfoegRechner";
+import { SEO } from "@/components/SEO";
 
 const BAfoeg = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Aufstiegs-BAföG ZMP/DH berechnen · Bis 75 % Zuschuss · KursRadar"
+        description="Ermittle deinen tatsächlichen Eigenanteil für zahnmedizinische Aufstiegsfortbildungen (ZMP, ZMV, ZMF, Dentalhygienikerin). Bis zu 75 % Förderung durch das AFBG. Konservativer Ansatz mit Quellen-Verweis."
+        path="/bafoeg"
+      />
       <div className="container py-12">
         <div className="mb-12 text-center">
           <h1 className="font-montserrat text-4xl font-bold text-foreground sm:text-5xl">

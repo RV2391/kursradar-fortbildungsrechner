@@ -1,9 +1,15 @@
 import { CostCalculator } from "@/components/CostCalculator";
 import { GTMDebugger } from "@/components/GTMDebugger";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Fortbildungskosten-Rechner Zahnarztpraxis 2026 · KursRadar"
+        description="Berechne dein jährliches Einsparpotenzial durch optimierte Fortbildungsplanung: Kurskosten, Zeit, Reisekosten. Konservativer Ansatz mit BZÄK-/VMF-Quellen. Kostenlos für Praxen."
+        path="/"
+      />
       <div className="container py-12">
         <div className="mb-12 text-center">
           <h1 className="font-montserrat text-4xl font-bold text-foreground sm:text-5xl">

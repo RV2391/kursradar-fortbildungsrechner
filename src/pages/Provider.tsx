@@ -1,8 +1,14 @@
 import { ProviderCalculator } from "@/components/provider/ProviderCalculator";
+import { SEO } from "@/components/SEO";
 
 const Provider = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Fortbildungs-Reichweite berechnen · Für Kursanbieter · KursRadar"
+        description="Berechne dein Umsatzpotenzial als Fortbildungsanbieter auf KursRadar: Reichweite, ROI und Preisempfehlungen für zahnmedizinische Kurse. Nur 5 % Provision auf vermittelte Buchungen."
+        path="/anbieter"
+      />
       <div className="container py-12">
         <div className="mb-12 text-center">
           <h1 className="font-montserrat text-4xl font-bold text-foreground sm:text-5xl">

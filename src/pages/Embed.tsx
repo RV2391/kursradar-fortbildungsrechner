@@ -1,4 +1,5 @@
 import { CostCalculator } from "@/components/CostCalculator";
+import { SEO } from "@/components/SEO";
 import { useEffect } from "react";
 
 const Embed = () => {
@@ -32,6 +33,12 @@ const Embed = () => {
 
   return (
     <div className="bg-background min-h-screen">
+      <SEO
+        title="Fortbildungskosten-Rechner (Embed) · KursRadar"
+        description="Eingebettete Version des KursRadar Fortbildungskosten-Rechners."
+        path="/embed"
+        noindex
+      />
       <CostCalculator />
     </div>
   );

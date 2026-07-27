@@ -1,8 +1,14 @@
 import { BildungsurlaubRechner } from "@/components/bildungsurlaub/BildungsurlaubRechner";
+import { SEO } from "@/components/SEO";
 
 const Bildungsurlaub = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Bildungsurlaub Zahnarzt & ZFA prüfen · Alle Bundesländer · KursRadar"
+        description="Prüfe in 3 Schritten, ob du Anspruch auf bezahlten Bildungsurlaub für deine zahnmedizinische Fortbildung hast. Für ZFA, angestellte Zahnärzte und Zahntechniker — mit Kleinbetriebsklausel und Anerkennungsstellen pro Bundesland."
+        path="/bildungsurlaub"
+      />
       <div className="container py-12">
         <div className="mb-12 text-center">
           <h1 className="font-montserrat text-4xl font-bold text-foreground sm:text-5xl">
