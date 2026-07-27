@@ -19,8 +19,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
-        roboto: ["Roboto", "sans-serif"],
+        /* KursRadar CD (BRAND.md §Typografie): Inter mit System-Fallback */
+        inter: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif"],
+        /* Legacy — behalten damit alte Klassen font-montserrat/font-roboto nicht brechen */
+        montserrat: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        roboto: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,12 +60,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // KursRadar brand colors
-        turquoise: "hsl(179, 69%, 45%)",
-        petrol: "hsl(179, 60%, 16%)",
-        coral: "hsl(0, 100%, 67%)",
-        mist: "hsl(180, 18%, 95%)",
-        graphite: "hsl(180, 9%, 22%)",
+        // KursRadar brand colors (BRAND.md 2026-03-10, aligned)
+        turquoise: "#14b8a6",
+        petrol: "#0f3331",
+        coral: "#ff5546",
+        mist: "#f9fafb",
+        graphite: "#1e293b",
+        /* Logo-Farben aus BRAND.md §Logo */
+        "logo-dark": "#0a5351",
+        "logo-light": "#34aea4",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -3,35 +3,47 @@
 @tailwind utilities;
  
 @layer base {
+  /* KursRadar CD (BRAND.md 2026-03-10):
+     Türkis #14b8a6  = HSL(172 78% 40%)
+     Petrol #0f3331  = HSL(178 55% 13%)
+     Coral  #ff5546  = HSL(5 100% 64%)
+     BG     #f9fafb  = HSL(210 20% 98%)
+     Text   #1e293b  = HSL(215 25% 27%)
+     Border #e2e8f0  = HSL(214 32% 91%)
+     Muted  #64748b  = HSL(215 16% 47%)
+  */
   :root {
-    --background: 180 18% 95%;
-    --foreground: 179 60% 16%;
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 179 60% 16%;
- 
+    --card-foreground: 215 25% 27%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 179 60% 16%;
- 
-    --primary: 179 69% 45%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Türkis als Primärfarbe */
+    --primary: 172 78% 40%;
     --primary-foreground: 0 0% 100%;
- 
-    --secondary: 180 18% 90%;
-    --secondary-foreground: 179 60% 16%;
- 
-    --muted: 180 18% 90%;
-    --muted-foreground: 180 9% 35%;
- 
-    --accent: 0 100% 67%;
+
+    /* Petrol als Sekundärfarbe (Headings, Nav) */
+    --secondary: 178 55% 13%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Coral als Akzent (Warnungen, Highlights) */
+    --accent: 5 100% 64%;
     --accent-foreground: 0 0% 100%;
- 
-    --destructive: 0 100% 67%;
+
+    --destructive: 5 100% 64%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 180 18% 85%;
-    --input: 180 18% 90%;
-    --ring: 179 69% 45%;
- 
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 172 78% 40%;
+
     --radius: 0.5rem;
   }
  

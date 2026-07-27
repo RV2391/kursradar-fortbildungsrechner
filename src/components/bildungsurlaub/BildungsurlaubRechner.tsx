@@ -175,7 +175,7 @@ export const BildungsurlaubRechner = () => {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Scale className="h-6 w-6 text-primary" />
-              <h2 className="font-montserrat text-2xl font-semibold text-card-foreground">
+              <h2 className="font-inter text-2xl font-semibold text-card-foreground">
                 Bildungsurlaub-Check
               </h2>
             </div>
@@ -275,7 +275,7 @@ export const BildungsurlaubRechner = () => {
                 </SelectContent>
               </Select>
               {bundesland?.kleinbetriebsSchwelle && (
-                <p className="text-xs text-amber-400 flex items-center gap-1">
+                <p className="text-xs text-accent flex items-center gap-1">
                   <AlertTriangle className="h-3 w-3" />
                   {bundesland.name}: Kleinbetriebsklausel ab unter {bundesland.kleinbetriebsSchwelle} Beschäftigten
                 </p>
@@ -310,15 +310,15 @@ export const BildungsurlaubRechner = () => {
               {/* --- Haupt-Ergebnis --- */}
               <Card
                 className={`shadow-lg ${
-                  ergebnis.hatAnspruch ? 'border-green-600/30' : 'border-amber-600/30'
+                  ergebnis.hatAnspruch ? 'border-primary/30' : 'border-accent/30'
                 }`}
               >
                 <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 font-montserrat text-xl">
+                  <CardTitle className="flex items-center gap-2 font-inter text-xl">
                     {ergebnis.hatAnspruch ? (
-                      <CheckCircle className="h-6 w-6 text-green-500" />
+                      <CheckCircle className="h-6 w-6 text-primary" />
                     ) : (
-                      <XCircle className="h-6 w-6 text-amber-500" />
+                      <XCircle className="h-6 w-6 text-accent" />
                     )}
                     {ergebnis.hatAnspruch ? 'Du hast Anspruch!' : 'Kein gesetzlicher Anspruch'}
                     {ergebnis.zukuenftig && (
@@ -332,13 +332,13 @@ export const BildungsurlaubRechner = () => {
                   <div
                     className={`rounded-lg p-4 ${
                       ergebnis.hatAnspruch
-                        ? 'bg-green-600/10 border border-green-600/20'
-                        : 'bg-amber-600/10 border border-amber-600/20'
+                        ? 'bg-primary/10 border border-primary/20'
+                        : 'bg-accent/10 border border-accent/20'
                     }`}
                   >
                     {ergebnis.hatAnspruch && ergebnis.tage && (
                       <div className="text-center mb-3">
-                        <div className="text-4xl font-bold text-green-500 font-montserrat">
+                        <div className="text-4xl font-bold text-primary font-inter">
                           {ergebnis.tage} Tage
                         </div>
                         <p className="text-sm text-muted-foreground">
@@ -394,7 +394,7 @@ export const BildungsurlaubRechner = () => {
               {!pdfRequested ? (
                 <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/30">
                   <CardHeader className="pb-3">
-                    <CardTitle className="font-montserrat text-lg flex items-center gap-2">
+                    <CardTitle className="font-inter text-lg flex items-center gap-2">
                       <FileText className="h-5 w-5 text-primary" />
                       Dein persönliches Bildungsurlaub-PDF
                     </CardTitle>
@@ -462,10 +462,10 @@ export const BildungsurlaubRechner = () => {
                   </CardContent>
                 </Card>
               ) : (
-                <Card className="border-green-600/40 bg-green-600/5">
+                <Card className="border-primary/40 bg-primary/5">
                   <CardContent className="p-6 text-center space-y-3">
-                    <CheckCircle className="h-10 w-10 text-green-500 mx-auto" />
-                    <h3 className="font-montserrat text-lg font-semibold text-card-foreground">
+                    <CheckCircle className="h-10 w-10 text-primary mx-auto" />
+                    <h3 className="font-inter text-lg font-semibold text-card-foreground">
                       PDF wird erstellt
                     </h3>
                     <p className="text-sm text-muted-foreground">
@@ -484,6 +484,41 @@ export const BildungsurlaubRechner = () => {
                 </Card>
               )}
 
+              {/* --- Disclaimer --- */}
+              <div className="rounded-lg border border-accent/30 bg-accent/5 p-3">
+                <div className="flex items-start gap-2 text-xs text-accent-foreground">
+                  <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-accent" />
+                  <p>
+                    <strong>Hinweis:</strong> Die Angaben basieren auf öffentlich zugänglichen
+                    Landesgesetzen (Stand Juli 2026) und ersetzen keine Rechtsberatung. Individueller
+                    Anspruch kann von der Standard-Berechnung abweichen (Tarifvertrag, Betriebs-
+                    vereinbarung, Beamtenrecht, PtW-Status). Vor konkretem Antrag bitte mit Personal-
+                    abteilung oder Rechtsberatung prüfen.
+                  </p>
+                </div>
+              </div>
+
+              {/* --- Kurs-Link --- */}
+              <a
+                href={`https://www.kurs-radar.com/results?state=${bundesland?.code}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg border border-primary/30 bg-primary/5 p-4 hover:bg-primary/10 transition-colors"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-sm">
+                    <p className="font-medium text-card-foreground">
+                      Passende Fortbildungen in {bundesland?.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Alle KursRadar-Kurse mit BL-Filter. Frage vor Buchung beim Anbieter, ob
+                      Bildungsurlaub-Anerkennung für dein Bundesland vorliegt.
+                    </p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-primary flex-shrink-0" />
+                </div>
+              </a>
+
               {/* --- Quellen-Fussnote --- */}
               <div className="text-xs text-muted-foreground space-y-1 px-1">
                 <p className="font-medium">Quellen:</p>
@@ -499,7 +534,7 @@ export const BildungsurlaubRechner = () => {
               className="w-full rounded-2xl bg-card/50 p-8 border border-dashed border-border flex flex-col items-center justify-center min-h-[400px] text-center"
             >
               <Calendar className="h-16 w-16 text-muted-foreground/40 mb-4" />
-              <h3 className="font-montserrat text-xl font-medium text-muted-foreground">
+              <h3 className="font-inter text-xl font-medium text-muted-foreground">
                 Hast du Anspruch auf Bildungsurlaub?
               </h3>
               <p className="text-sm text-muted-foreground/70 mt-2 max-w-sm">

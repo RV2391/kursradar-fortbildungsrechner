@@ -18,8 +18,13 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const supabase = createClient(supabaseUrl, supabaseKey)
 
-    // Get n8n webhook URL from secrets
-    const webhookUrl = Deno.env.get('N8N_WEBHOOK_URL')
+    // Get n8n webhook URLs from secrets
+    // - N8N_WEBHOOK_URL: bestehender Kostenrechner-Flow (form_type='calculator_results')
+    // - N8N_BILDUNGSURLAUB_WEBHOOK_URL: neuer Bildungsurlaub-PDF-Flow (form_type='bildungsurlaub_pdf')
+    // Falls die spezielle URL nicht gesetzt ist, faellt der Bildungsurlaub-Payload auf
+    // die Standard-URL zurueck — der n8n-Workflow soll dann per form_type routen.
+    const defaultWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL')
+    const bildungsurlaubWebhookUrl = Deno.env.get('N8N_BILDUNGSURLAUB_WEBHOOK_URL')
 
     // Parse request body
     const requestData = await req.json()
@@ -110,11 +115,18 @@ serve(async (req) => {
     console.log('✅ Form submission stored in database')
 
     // Forward to n8n webhook for lead processing
-    if (webhookUrl) {
-      try {
-        console.log('🔄 Forwarding to n8n webhook...')
+    // Bildungsurlaub-Leads gehen an dedizierte URL (falls konfiguriert),
+    // alle anderen Payloads an den bisherigen Kostenrechner-Workflow.
+    const targetWebhookUrl =
+      formType === 'bildungsurlaub_pdf' && bildungsurlaubWebhookUrl
+        ? bildungsurlaubWebhookUrl
+        : defaultWebhookUrl
 
-        const webhookResponse = await fetch(webhookUrl, {
+    if (targetWebhookUrl) {
+      try {
+        console.log(`🔄 Forwarding to n8n webhook (form_type=${formType})...`)
+
+        const webhookResponse = await fetch(targetWebhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

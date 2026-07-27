@@ -280,53 +280,44 @@ async function renderPdf(p: PdfPayload): Promise<Uint8Array> {
     y -= 12;
   }
 
-  // === Top-Kurse (falls vorhanden) ===
-  if (p.top_kurse && p.top_kurse.length > 0) {
-    y -= 20;
-    page.drawText(
-      `Anerkannte Fortbildungen fuer ${stateName} (Top ${p.top_kurse.length})`,
-      { x: MARGIN_X, y, size: 12, font: fontBold, color: BRAND_DARK },
-    );
+  // === Passende Fortbildungen (Deep-Link statt kuratierte Kursliste) ===
+  y -= 20;
+  page.drawText(`Passende Fortbildungen in ${stateName} finden`, {
+    x: MARGIN_X, y, size: 12, font: fontBold, color: BRAND_DARK,
+  });
 
-    y -= 15;
-    for (const kurs of p.top_kurse.slice(0, 5)) {
-      const titelLines = wrapText(kurs.titel, 9, fontBold, A4_WIDTH - 2 * MARGIN_X - 60);
-      for (const line of titelLines) {
-        page.drawText(line, { x: MARGIN_X, y, size: 9, font: fontBold, color: BRAND_DARK });
-        y -= 11;
-      }
-      const meta: string[] = [];
-      if (kurs.date) meta.push(formatDate(kurs.date));
-      if (kurs.city) meta.push(kurs.city);
-      if (kurs.cme_points) meta.push(`${kurs.cme_points} CME-Punkte`);
-      if (kurs.price_cents != null) meta.push(formatPrice(kurs.price_cents));
-      if (meta.length) {
-        page.drawText(meta.join(' · '), {
-          x: MARGIN_X,
-          y,
-          size: 8,
-          font,
-          color: TEXT_MUTED,
-        });
-        y -= 10;
-      }
-      if (kurs.url) {
-        page.drawText(kurs.url, { x: MARGIN_X, y, size: 8, font, color: BRAND_PRIMARY });
-        y -= 12;
-      }
-      y -= 4;
-    }
-  } else {
-    y -= 20;
-    page.drawText(
-      'Wir kuratieren gerade die Bildungsurlaub-faehigen Fortbildungen fuer dein Bundesland.',
-      { x: MARGIN_X, y, size: 9, font: fontItalic, color: TEXT_MUTED },
-    );
-    y -= 12;
-    page.drawText(
-      'Sobald dein bevorzugter Kurs die Anerkennung erhaelt, informieren wir dich per E-Mail.',
-      { x: MARGIN_X, y, size: 9, font: fontItalic, color: TEXT_MUTED },
-    );
+  y -= 15;
+  const kursSuchLink = `https://www.kurs-radar.com/results?state=${p.state_code}`;
+  page.drawText('Alle KursRadar-Kurse mit Bundesland-Filter auf einer Seite:', {
+    x: MARGIN_X, y, size: 9, font, color: BRAND_DARK,
+  });
+  y -= 12;
+  page.drawText(kursSuchLink, { x: MARGIN_X, y, size: 9, font: fontBold, color: BRAND_PRIMARY });
+
+  y -= 18;
+  const suchHinweis = [
+    'Wichtig: Frage vor der Buchung beim Anbieter, ob der Kurs als Bildungsurlaub in',
+    `${stateName} anerkannt ist. Die Anerkennung muss der Kursanbieter pro Bundesland`,
+    'beantragen — die reine BZAeK/PTK/HWK-Fortbildungspunkte-Anerkennung reicht dafuer nicht.',
+  ];
+  for (const line of suchHinweis) {
+    page.drawText(line, { x: MARGIN_X, y, size: 8, font: fontItalic, color: TEXT_MUTED });
+    y -= 10;
+  }
+
+  // === Rechts-Disclaimer ===
+  y -= 12;
+  page.drawText('Rechtlicher Hinweis', { x: MARGIN_X, y, size: 9, font: fontBold, color: TEXT_MUTED });
+  y -= 12;
+  const disclaimerLines = [
+    'Alle Angaben basieren auf oeffentlich zugaenglichen Landesgesetzen und ersetzen keine',
+    'Rechtsberatung. Individueller Anspruch kann von der Standard-Berechnung abweichen',
+    '(Tarifvertrag, Betriebsvereinbarung, Beamtenrecht, PtW-Status). Vor konkretem Antrag',
+    'bitte mit Personalabteilung oder Rechtsberatung pruefen.',
+  ];
+  for (const line of disclaimerLines) {
+    page.drawText(line, { x: MARGIN_X, y, size: 8, font, color: TEXT_MUTED });
+    y -= 10;
   }
 
   // === Footer ===
