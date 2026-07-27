@@ -6,6 +6,8 @@ import { ResultSummary } from "./result/ResultSummary";
 import { ResultDetails } from "./result/ResultDetails";
 import { TimeSavingsBreakdown } from "./result/TimeSavingsBreakdown";
 import { CustomForm } from "./CustomForm";
+import { useGTMTracking } from "@/hooks/useGTMTracking";
+import { ArrowRight } from "lucide-react";
 
 // Extended results interface
 interface ExtendedResults extends Results {
@@ -23,45 +25,74 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   calculatorData,
   addressComponents
 }) => {
+  const { trackEvent } = useGTMTracking();
+
+  const handleSignupClick = () => {
+    trackEvent({
+      event: 'signup_cta_click',
+      source: 'rechner_result',
+      savings_amount: Math.round(Number(results.savings)) || 0,
+      team_size: calculatorData.teamSize || 0,
+    });
+  };
+
+  const handleAnalyseScroll = () => {
+    trackEvent({
+      event: 'analyse_cta_click',
+      source: 'rechner_result',
+    });
+    const formElement = document.getElementById('detailed-analysis-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        const emailInput = document.querySelector('#email');
+        if (emailInput) {
+          (emailInput as HTMLInputElement).focus();
+        }
+      }, 500);
+    }
+  };
+
+  const signupUrl =
+    'https://www.kurs-radar.com/signup?utm_source=rechner&utm_medium=result_page&utm_campaign=fortbildungskosten_p0';
+
   return (
     <div className="space-y-6">
       <Card className="w-full bg-card border shadow-lg">
         <div className="p-6">
           <div className="space-y-4">
             <h3 className="font-montserrat text-2xl font-semibold text-card-foreground">Deine Ersparnis</h3>
-            
-            <ResultSummary 
+
+            <ResultSummary
               savings={results.savings}
               savingsPercentage={results.savingsPercentage}
               totalTraditionalCosts={results.totalTraditionalCosts}
               optimizedCosts={results.optimizedCosts}
             />
 
-            {/* CTA Button direkt nach der Hauptersparnis */}
-            <div className="text-center py-4">
-              <button
-                onClick={() => {
-                  const formElement = document.getElementById('detailed-analysis-form');
-                  if (formElement) {
-                    formElement.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
-                    setTimeout(() => {
-                      const emailInput = document.querySelector('#email');
-                      if (emailInput) {
-                        (emailInput as HTMLInputElement).focus();
-                      }
-                    }, 500);
-                  }
-                }}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] text-lg font-montserrat"
+            {/* CTAs direkt nach der Hauptersparnis: Primary Signup + Secondary Analyse */}
+            <div className="flex flex-col items-center gap-3 py-4">
+              <a
+                href={signupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleSignupClick}
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-4 px-10 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] text-lg font-montserrat w-full sm:w-auto"
               >
-                Jetzt detaillierte Analyse anfordern
-              </button>
-              <p className="text-sm text-muted-foreground mt-2 font-roboto">
-                Kostenlos per E-Mail erhalten
+                Jetzt kostenlos bei KursRadar anmelden und Kurse buchen
+                <ArrowRight className="h-5 w-5" />
+              </a>
+              <p className="text-sm text-muted-foreground font-roboto">
+                Kostenlos für Praxen · Keine Kreditkarte nötig
               </p>
+
+              <button
+                type="button"
+                onClick={handleAnalyseScroll}
+                className="mt-2 text-primary hover:text-primary/80 underline underline-offset-4 text-sm font-medium font-roboto transition-colors"
+              >
+                Lieber zuerst detaillierte E-Mail-Analyse anfordern →
+              </button>
             </div>
 
             <ResultDetails 
