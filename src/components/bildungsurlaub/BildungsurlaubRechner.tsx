@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -46,14 +47,26 @@ const BRANCHEN: { code: BranchenCode; label: string; iconLabel: string }[] = [
   { code: 'psychotherapie', label: 'Psychotherapie', iconLabel: '🧠' },
 ];
 
+const VALID_BRANCHEN: BranchenCode[] = ['zahnarztpraxis', 'zahntechnik', 'psychotherapie'];
+
 export const BildungsurlaubRechner = () => {
   const { toast } = useToast();
   const { trackEvent } = useGTMTracking();
+  const [searchParams] = useSearchParams();
 
-  // --- Multi-Step-State ---
-  const [selectedBundesland, setSelectedBundesland] = useState<string>('');
-  const [selectedBranche, setSelectedBranche] = useState<BranchenCode | ''>('');
-  const [selectedRolle, setSelectedRolle] = useState<string>('');
+  // --- Multi-Step-State (Query-Param-Vorbelegung aus LP-CTAs) ---
+  const [selectedBundesland, setSelectedBundesland] = useState<string>(() => {
+    const state = (searchParams.get('state') ?? '').toUpperCase();
+    return BUNDESLAENDER.find((b) => b.code === state) ? state : '';
+  });
+  const [selectedBranche, setSelectedBranche] = useState<BranchenCode | ''>(() => {
+    const branche = searchParams.get('branche') as BranchenCode | null;
+    return branche && VALID_BRANCHEN.includes(branche) ? branche : '';
+  });
+  const [selectedRolle, setSelectedRolle] = useState<string>(() => {
+    const rolle = searchParams.get('rolle') ?? '';
+    return getRolleByCode(rolle) ? rolle : '';
+  });
   const [betriebsgroesse, setBetriebsgroesse] = useState<string>('');
   const [wunschkurs, setWunschkurs] = useState<string>('');
   const [email, setEmail] = useState<string>('');
