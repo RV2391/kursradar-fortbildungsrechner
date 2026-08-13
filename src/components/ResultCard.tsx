@@ -30,7 +30,6 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   const { stats: platformStats } = usePlatformStats();
 
   const freePct = Math.round(platformStats.free_or_sponsored_pct * 100);
-  const pricePct = Math.round(platformStats.price_optimization_factor * 100);
 
   const handleSignupClick = () => {
     trackEvent({
@@ -112,18 +111,19 @@ export const ResultCard: React.FC<ResultCardProps> = ({
                 <h4 className="mb-2 font-montserrat font-medium text-card-foreground">So setzt sich dein Einsparpotenzial zusammen:</h4>
                 <ul className="list-disc pl-4 space-y-2">
                   <li>
-                    <strong>Kostenlose & gesponserte Kurse ({freePct}%):</strong>{" "}
+                    <strong>Kostenlose Kurse ({freePct}%):</strong>{" "}
                     Aktuell sind <strong>{platformStats.free_or_sponsored_count} von{" "}
                     {platformStats.total_upcoming_count}</strong> kommenden Kursen auf
-                    KursRadar kostenlos oder gesponsert &mdash; Webinare und Präsenz-Formate,
-                    die du bei der Suche auf einzelnen Anbieter-Websites oft übersiehst.
+                    KursRadar komplett kostenfrei &ndash; überwiegend Webinare, die du bei
+                    der Suche auf einzelnen Anbieter-Websites leicht übersiehst.
                     {platformStats.is_fallback && (
                       <span className="text-xs text-muted-foreground/60 ml-1">(Stand cached)</span>
                     )}
                   </li>
                   <li>
-                    <strong>Preisoptimierung ({pricePct}%):</strong> Durch den transparenten
-                    Preisvergleich findest du günstigere Alternativen für die gleichen Inhalte.
+                    <strong>Transparenter Preisvergleich:</strong> Ähnliche Kurse verschiedener
+                    Anbieter direkt gegenüberstellen &ndash; oft findest du dieselben Inhalte
+                    deutlich günstiger.
                   </li>
                   {results.nearestInstitute && (
                     <li>

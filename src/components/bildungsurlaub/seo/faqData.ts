@@ -52,7 +52,7 @@ export const BILDUNGSURLAUB_FAQ: FAQItem[] = [
   {
     question: "Was ist der Unterschied zwischen Bildungsurlaub und Fortbildungspflicht?",
     answer:
-      "Die zahnärztliche Fortbildungspflicht (§ 95d SGB V, 250 CME-Punkte in 5 Jahren) ist eine Berufspflicht und muss unabhängig vom Arbeitsverhältnis erfüllt werden. Bildungsurlaub ist dagegen ein arbeitsrechtlicher Freistellungsanspruch — beides lässt sich aber kombinieren: der Bildungsurlaub finanziert die Zeit, in der du CME-Punkte für die Fortbildungspflicht sammelst.",
+      "Die zahnärztliche Fortbildungspflicht (§ 95d SGB V, 125 Fortbildungspunkte in 5 Jahren, Ø 25/Jahr) ist eine Berufspflicht und muss unabhängig vom Arbeitsverhältnis erfüllt werden. Bildungsurlaub ist dagegen ein arbeitsrechtlicher Freistellungsanspruch — beides lässt sich aber kombinieren: der Bildungsurlaub finanziert die Zeit, in der du Fortbildungspunkte für die Fortbildungspflicht sammelst.",
   },
   {
     question: "Kann ich Bildungsurlaub für Präsenz- und Online-Kurse nutzen?",

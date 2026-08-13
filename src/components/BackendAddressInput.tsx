@@ -373,7 +373,7 @@ export const BackendAddressInput = ({
             </Button>
           </>
         )}
-        {apiStatus === 'unknown' && (
+        {apiStatus === 'unknown' && address.length > 0 && (
           <>
             <CheckCircle2 className="w-4 h-4 text-blue-500" />
             <span className="text-muted-foreground">

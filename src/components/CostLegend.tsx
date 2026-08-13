@@ -61,10 +61,10 @@ export const CostLegend = () => {
                     </p>
                     <ul className="list-disc pl-4 mt-2 text-muted-foreground font-roboto space-y-2">
                       <li>
-                        <strong>30% kostenlose Kurse:</strong> Gesponserte Webinare und kostenfreie Angebote auf der Plattform
+                        <strong>Kostenlose Kurse:</strong> Kostenfreie Webinare und Präsenz-Angebote auf der Plattform
                       </li>
                       <li>
-                        <strong>15% Preisoptimierung:</strong> Durch Preisvergleich und Transparenz finden Sie günstigere Alternativen
+                        <strong>Transparenter Preisvergleich:</strong> Durch die direkte Gegenüberstellung ähnlicher Kurse verschiedener Anbieter findest du günstigere Alternativen für dieselben Inhalte
                       </li>
                       <li>
                         <strong>Weniger Reisekosten:</strong> Mehr Online-Optionen durch bessere Übersicht

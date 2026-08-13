@@ -76,8 +76,7 @@ export const GTMDebugger = () => {
     return new Date(timestamp).toLocaleTimeString();
   };
 
-  // Always show in development, or when GTM events are detected
-  if (process.env.NODE_ENV !== 'development' && events.length === 0) {
+  if (!import.meta.env.DEV) {
     return null;
   }
 
