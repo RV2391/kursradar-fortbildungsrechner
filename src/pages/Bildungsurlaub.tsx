@@ -1,5 +1,24 @@
 import { BildungsurlaubRechner } from "@/components/bildungsurlaub/BildungsurlaubRechner";
 import { SEO } from "@/components/SEO";
+import { BildungsurlaubHowTo } from "@/components/bildungsurlaub/seo/BildungsurlaubHowTo";
+import { BildungsurlaubFAQ } from "@/components/bildungsurlaub/seo/BildungsurlaubFAQ";
+import { BundeslaenderUebersicht } from "@/components/bildungsurlaub/seo/BundeslaenderUebersicht";
+import {
+  webApplicationSchema,
+  bildungsurlaubHowToSchema,
+  buildFAQPageSchema,
+  buildBreadcrumbSchema,
+} from "@/components/bildungsurlaub/seo/schemas";
+
+const jsonLd = [
+  webApplicationSchema,
+  bildungsurlaubHowToSchema,
+  buildFAQPageSchema(),
+  buildBreadcrumbSchema([
+    { name: "Start", path: "/" },
+    { name: "Bildungsurlaub-Check", path: "/bildungsurlaub" },
+  ]),
+];
 
 const Bildungsurlaub = () => {
   return (
@@ -8,6 +27,7 @@ const Bildungsurlaub = () => {
         title="Bildungsurlaub Zahnarzt & ZFA prüfen · Alle Bundesländer · KursRadar"
         description="Prüfe in 3 Schritten, ob du Anspruch auf bezahlten Bildungsurlaub für deine zahnmedizinische Fortbildung hast. Für ZFA, angestellte Zahnärzte und Zahntechniker — mit Kleinbetriebsklausel und Anerkennungsstellen pro Bundesland."
         path="/bildungsurlaub"
+        jsonLd={jsonLd}
       />
       <div className="container py-12">
         <div className="mb-12 text-center">
@@ -23,6 +43,9 @@ const Bildungsurlaub = () => {
           </p>
         </div>
         <BildungsurlaubRechner />
+        <BildungsurlaubHowTo />
+        <BundeslaenderUebersicht />
+        <BildungsurlaubFAQ />
       </div>
     </div>
   );

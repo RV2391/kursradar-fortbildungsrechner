@@ -6,18 +6,22 @@ interface SEOProps {
   path: string;
   image?: string;
   noindex?: boolean;
+  /**
+   * Absolute canonical-URL, überschreibt den path-basierten Default.
+   * Nutzen wenn eine andere Domain die kanonische Version ist (z.B.
+   * cross-domain canonical auf die Kern-Website `kurs-radar.com`).
+   */
+  canonicalUrl?: string;
+  jsonLd?: object | object[];
 }
 
 const BASE_URL = "https://rechner.kurs-radar.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
 
-/**
- * Zentraler SEO-Head fuer alle Rechner-Routen.
- * Pro Route ein Aufruf: <SEO title="..." description="..." path="/bafoeg" />
- */
-export const SEO = ({ title, description, path, image, noindex }: SEOProps) => {
-  const canonical = `${BASE_URL}${path === "/" ? "" : path}`;
+export const SEO = ({ title, description, path, image, noindex, canonicalUrl, jsonLd }: SEOProps) => {
+  const canonical = canonicalUrl ?? `${BASE_URL}${path === "/" ? "" : path}`;
   const ogImage = image || DEFAULT_OG_IMAGE;
+  const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (
     <Helmet>
@@ -39,6 +43,12 @@ export const SEO = ({ title, description, path, image, noindex }: SEOProps) => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+
+      {schemas.map((schema, i) => (
+        <script key={`ld-${i}`} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
     </Helmet>
   );
 };
