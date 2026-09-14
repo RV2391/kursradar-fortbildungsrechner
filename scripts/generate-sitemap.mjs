@@ -17,6 +17,7 @@ const allRoutes = [
   { loc: "/", priority: "1.0", changefreq: "weekly" },
   { loc: "/bildungsurlaub", priority: "0.9", changefreq: "weekly" },
   { loc: "/bafoeg", priority: "0.9", changefreq: "weekly" },
+  { loc: "/cme-punkte-rechner", priority: "0.9", changefreq: "weekly" },
   { loc: "/anbieter", priority: "0.7", changefreq: "monthly" },
 ];
 

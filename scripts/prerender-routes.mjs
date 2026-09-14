@@ -68,6 +68,13 @@ const routes = [
     description:
       "Bringe deine zahnmedizinischen Fortbildungen auf die führende Kurs-Plattform Deutschlands. Kurs-Uploads, Reichweite und Kalender-Integration.",
   },
+  {
+    path: "/cme-punkte-rechner",
+    title:
+      "CME-Punkte-Rechner Zahnärzte 2026 · Fortbildungsnachweis § 95d SGB V · KursRadar",
+    description:
+      "Kostenloser CME-Rechner für Vertragszahnärzte: Prüfe in 30 Sekunden, wie viele Fortbildungspunkte dir im laufenden 5-Jahres-Zyklus noch fehlen. Mit monatlichem Bedarf und Kurs-Empfehlungen aus dem KursRadar-Katalog.",
+  },
 ];
 
 // Kern-Website (kurs-radar.com) hat für 15 von 16 Bundesländern eigene

@@ -12,6 +12,7 @@ import Provider from "./pages/Provider";
 import BAfoeg from "./pages/BAfoeg";
 import Bildungsurlaub from "./pages/Bildungsurlaub";
 import BildungsurlaubBundesland from "./pages/BildungsurlaubBundesland";
+import CmePunkte from "./pages/CmePunkte";
 
 // Header wird auf allen Routes gerendert AUSSER /embed (dort embedded, ohne Header)
 const HeaderGate = () => {
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/bafoeg" element={<BAfoeg />} />
             <Route path="/bildungsurlaub" element={<Bildungsurlaub />} />
             <Route path="/bildungsurlaub/:slug" element={<BildungsurlaubBundesland />} />
+            <Route path="/cme-punkte-rechner" element={<CmePunkte />} />
             <Route path="/embed" element={<Embed />} />
           </Routes>
         </BrowserRouter>
