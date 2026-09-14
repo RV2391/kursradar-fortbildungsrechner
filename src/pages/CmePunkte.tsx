@@ -30,14 +30,14 @@ const CmePunkte = () => {
       />
       <div className="container py-12">
         <div className="mb-10 text-center">
-          <h1 className="font-montserrat text-4xl font-bold text-foreground sm:text-5xl">
+          <h1 className="font-sans text-4xl font-bold text-foreground sm:text-5xl">
             <span className="text-primary">CME-Punkte</span>-Rechner
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground font-roboto max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Prüfe deinen Fortbildungs-Stand im laufenden 5-Jahres-Zyklus nach § 95d SGB V.
             Sehe sofort, wie viele Punkte dir noch fehlen — und wieviel Fortbildung pro Monat realistisch ist.
           </p>
-          <p className="mt-3 text-sm text-muted-foreground/70 font-roboto">
+          <p className="mt-3 text-sm text-muted-foreground/70">
             Kostenlos · ohne Anmeldung · 125 Punkte in 5 Jahren
           </p>
         </div>
@@ -47,10 +47,10 @@ const CmePunkte = () => {
         <CmePunkteHowTo />
 
         <section className="mt-16 max-w-3xl mx-auto">
-          <h2 className="font-montserrat text-2xl font-semibold text-foreground mb-4">
+          <h2 className="font-sans text-2xl font-semibold text-foreground mb-4">
             Warum die 5-Jahres-Regel für Vertragszahnärzte relevant ist
           </h2>
-          <div className="prose prose-slate max-w-none font-roboto text-muted-foreground space-y-4">
+          <div className="prose prose-slate max-w-none text-muted-foreground space-y-4">
             <p>
               § 95d SGB V verpflichtet alle Vertragszahnärztinnen und Vertragszahnärzte, alle fünf Jahre einen Fortbildungsnachweis über <strong>125 Fortbildungspunkte</strong> gegenüber der Kassenzahnärztlichen Vereinigung (KZV) zu erbringen. Der Zyklus beginnt individuell mit der Zulassung als Vertragszahnarzt oder mit dem letzten erfolgreichen Nachweis.
             </p>
@@ -69,20 +69,30 @@ const CmePunkte = () => {
         <CmePunkteFAQ />
 
         <section className="mt-16 max-w-3xl mx-auto text-center">
-          <h2 className="font-montserrat text-2xl font-semibold text-foreground mb-4">
-            Bereit für die Planung?
+          <h2 className="font-sans text-2xl font-semibold text-foreground mb-4">
+            Credit Wallet: dein CME-Konto automatisiert
           </h2>
-          <p className="text-muted-foreground font-roboto mb-6">
-            Alle CME-relevanten Fortbildungen von über 60 Anbietern findest du gebündelt auf KursRadar. Filtere nach Punkten, Datum, Region und Fachgebiet.
+          <p className="text-muted-foreground mb-6">
+            Manuelles Punkte-Tracken ist der Klassiker unter den vergessenen Aufgaben. Die Credit Wallet auf KursRadar übernimmt das für dich: automatische Uploads bei jeder Buchung, Erinnerung vor Zyklus-Ende, immer aktueller Punktestand. Kostenlos.
           </p>
-          <a
-            href="https://www.kurs-radar.com/veranstaltungen"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center rounded-md bg-primary px-6 py-3 text-primary-foreground font-roboto font-medium hover:bg-primary/90 transition"
-          >
-            Zur Kurs-Suche auf KursRadar
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://www.kurs-radar.com/credit-wallet?utm_source=rechner&utm_medium=cme_check&utm_campaign=cme_punkte_check&utm_content=footer_cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-primary-foreground font-medium hover:bg-primary/90 transition"
+            >
+              Credit Wallet ansehen
+            </a>
+            <a
+              href="https://www.kurs-radar.com/veranstaltungen?utm_source=rechner&utm_medium=cme_check&utm_campaign=cme_punkte_check&utm_content=footer_kurse"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md border border-primary bg-transparent px-6 py-3 text-primary font-medium hover:bg-primary/10 transition"
+            >
+              Alle Kurse durchsuchen
+            </a>
+          </div>
         </section>
       </div>
     </div>

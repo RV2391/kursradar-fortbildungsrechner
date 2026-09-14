@@ -20,7 +20,7 @@ const steps = [
 
 export const KostenrechnerHowTo = () => (
   <section id="so-funktionierts" className="mt-16 max-w-4xl mx-auto">
-    <h2 className="font-montserrat text-2xl font-semibold text-foreground mb-8 text-center">
+    <h2 className="font-sans text-2xl font-semibold text-foreground mb-8 text-center">
       So funktioniert der Kostenrechner
     </h2>
     <div className="grid gap-6 md:grid-cols-3">
@@ -33,10 +33,10 @@ export const KostenrechnerHowTo = () => (
             className="bg-card border rounded-lg p-6 shadow-sm"
           >
             <Icon className="h-8 w-8 text-primary mb-4" aria-hidden />
-            <h3 className="font-montserrat text-lg font-semibold text-card-foreground mb-2">
+            <h3 className="font-sans text-lg font-semibold text-card-foreground mb-2">
               {step.title}
             </h3>
-            <p className="text-muted-foreground font-roboto text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {step.text}
             </p>
           </div>
